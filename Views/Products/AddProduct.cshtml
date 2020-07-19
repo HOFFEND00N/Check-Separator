@@ -1,0 +1,26 @@
+﻿@model CheckSeparatorMVC.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h1> Add Product </h1>
+
+<h4> Product </h4>
+
+<form asp-action="AddProduct">
+    <div class="group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+    <div class="group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" />
+    </div>
+    <div class="group">
+        <label asp-for="Amount"></label>
+        <input asp-for="Amount" />
+    </div>
+</form>
+
+<a asp-action="Index">Home</a>
