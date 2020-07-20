@@ -8,7 +8,7 @@
 
 <h4> Product </h4>
 
-<form asp-action="AddProduct">
+<form asp-action="AddProduct" asp-controller="Products" method="post">
     <div class="group">
         <label asp-for="Name"></label>
         <input asp-for="Name" />
@@ -21,6 +21,9 @@
         <label asp-for="Amount"></label>
         <input asp-for="Amount" />
     </div>
+    <div class="group">
+        <input type="submit" value="Add" class="btn btn-primary" />
+    </div>
 </form>
 
-<a asp-action="Index">Home</a>
+<a asp-action="Index" >Back to list</a>

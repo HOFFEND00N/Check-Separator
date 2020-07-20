@@ -1,4 +1,54 @@
-﻿@page
-@model CheckSeparatorMVC.Views.Products.IndexModel
+﻿@model IEnumerable<CheckSeparatorMVC.Models.Product> 
+
 @{
+    ViewData["Title"] = "Product list";
 }
+
+<a asp-action="AddProduct">Add product</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Amount
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model is null)
+        {
+            <p class="ModelEmpty">
+                There is no products!
+            </p>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        <a asp-action="DeleteProduct">Delete product</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+

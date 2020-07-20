@@ -1,3 +1,5 @@
+using CheckSeparatorMVC.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,9 @@ namespace CheckSeparatorMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<CheckSeparatorMvcContext>(options =>
+           options.UseSqlServer(Configuration.GetConnectionString("CheckSeparatorMvcContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

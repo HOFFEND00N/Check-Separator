@@ -8,6 +8,10 @@ namespace CheckSeparatorMVC.Models
     public class ProductViewModel
     {
         public List<Product> Products { get; set; }
-        public string SearchString { get; set; }
+
+        public ProductViewModel()
+        {
+            Products = new List<Product>();
+        }
     }
 }
