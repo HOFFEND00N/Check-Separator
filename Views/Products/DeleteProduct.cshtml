@@ -4,4 +4,26 @@
     ViewData["Title"] = "Delete Product";
 }
 
+<h1>Delete</h1>
+
+<h3>Are you sure to delete this product?</h3>
+<form asp-action="DeleteProduct" asp-controller="Products" method="post">
+    <div class="group">
+        <label asp-for="Name"></label>
+        @Html.DisplayFor(model => Model.Name)
+    </div>
+    <div class="group">
+        <label asp-for="Price"></label>
+        @Html.DisplayFor(model => Model.Price)
+    </div>
+    <div class="group">
+        <label asp-for="Amount"></label>
+        @Html.DisplayFor(model => Model.Amount)
+    </div>
+    <form asp-action="DeleteProduct">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="DeleteProduct" class="btn btn-danger" />
+        <a asp-action="Index">Back to list</a>
+    </form>
+</form>
 

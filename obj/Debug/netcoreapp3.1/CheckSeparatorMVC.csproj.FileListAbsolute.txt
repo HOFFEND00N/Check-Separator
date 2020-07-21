@@ -43,7 +43,6 @@ C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\CheckSeparato
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\CheckSeparatorMVC.pdb
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\CheckSeparatorMVC.Views.dll
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\CheckSeparatorMVC.Views.pdb
-C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csprojAssemblyReference.cache
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.AssemblyInfoInputs.cache
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.AssemblyInfo.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.RazorAssemblyInfo.cache

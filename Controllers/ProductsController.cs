@@ -34,8 +34,24 @@ namespace CheckSeparatorMVC.Controllers
             context.Add(product);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            //return View("Index");
         }
 
+
+        
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var product = await context.Product.FirstOrDefaultAsync(p => p.Id == id);
+            return View(product);
+        }
+
+        [HttpPost, ActionName("DeleteProduct")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var product = await context.Product.FindAsync(id);
+            context.Product.Remove(product);
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

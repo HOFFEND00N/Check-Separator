@@ -42,7 +42,7 @@
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>
                     <td>
-                        <a asp-action="DeleteProduct">Delete product</a>
+                        <a asp-action="DeleteProduct" asp-route-id="@item.Id"> Delete </a>
                     </td>
                 </tr>
             }
