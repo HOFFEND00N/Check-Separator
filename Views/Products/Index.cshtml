@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CheckSeparatorMVC.Models.Product> 
+﻿@model IEnumerable<CheckSeparatorMVC.Models.Product>
 
 @{
     ViewData["Title"] = "Product list";
@@ -42,7 +42,8 @@
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>
                     <td>
-                        <a asp-action="DeleteProduct" asp-route-id="@item.Id"> Delete </a>
+                        <a asp-action="DeleteProduct" asp-route-id="@item.Id"> Delete </a> |
+                        <a asp-action="EditProduct" asp-route-id="@item.Id"> Edit </a>
                     </td>
                 </tr>
             }

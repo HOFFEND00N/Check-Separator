@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CheckSeparatorMVC.Data;
 using CheckSeparatorMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace CheckSeparatorMVC.Controllers
@@ -50,6 +51,21 @@ namespace CheckSeparatorMVC.Controllers
         {
             var product = await context.Product.FindAsync(id);
             context.Product.Remove(product);
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> EditProduct(int id)
+        {
+            var product = await context.Product.FindAsync(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProduct(int id, [Bind("Price,Amount,Name,Id")] Product product)
+        {
+            context.Product.Update(product);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
