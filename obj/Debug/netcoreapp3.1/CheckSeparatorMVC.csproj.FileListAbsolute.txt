@@ -67,7 +67,6 @@ C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparato
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csproj.CopyComplete
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\AddProduct.cshtml.g.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
-C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\ProductMenu.cshtml.g.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\DeleteProduct.cshtml.g.cs
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
@@ -106,3 +105,5 @@ C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparato
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csprojAssemblyReference.cache
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\EditProduct.cshtml.g.cs
+C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\CalculateCheck.cshtml.g.cs
+C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\Transactions.cshtml.g.cs

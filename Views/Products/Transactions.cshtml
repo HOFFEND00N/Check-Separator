@@ -1,0 +1,32 @@
+﻿@model List<CheckSeparatorMVC.Models.Transactions>
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<h1>List of transactions</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th> Sender </th>
+            <th> Transacton size </th>
+            <th> Recipient </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Sender
+                </td>
+                <td>
+                    @item.TransactionSize
+                </td>
+                <td>
+                    @item.Recipient
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

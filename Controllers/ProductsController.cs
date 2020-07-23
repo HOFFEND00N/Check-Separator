@@ -69,5 +69,28 @@ namespace CheckSeparatorMVC.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult CalculateCheck()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CalculateCheck(Check check)
+        {
+            double sum = 0;
+            foreach(var i in context.Product)
+            {
+                sum += i.Price * i.Amount;
+            }
+            var tmp = sum / check.Count;
+            var TransactionList = new List<Transactions>();
+            foreach(var i in check.Names.Split(" "))
+            {
+                TransactionList.Add(new Transactions(i, check.Master, tmp));
+            }
+            return View("Transactions",TransactionList);
+        }
     }
 }
