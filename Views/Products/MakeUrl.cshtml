@@ -1,0 +1,13 @@
+﻿@model CheckSeparatorMVC.Models.Url
+@{
+    ViewData["Title"] = "Link made";
+}
+
+<h1>Link made</h1>
+
+<div class="form-group">
+    <label>Link</label>
+    <input type="url" asp-for="Address" />
+</div>
+
+<a asp-action="Index">Back to list</a>

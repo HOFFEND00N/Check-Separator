@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CheckSeparatorMVC.Data;
 using CheckSeparatorMVC.Models;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
@@ -77,7 +79,7 @@ namespace CheckSeparatorMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CalculateCheck(Check check)
+        public IActionResult CalculateCheck(Check check)
         {
             double sum = 0;
             foreach(var i in context.Product)
@@ -91,6 +93,18 @@ namespace CheckSeparatorMVC.Controllers
                 TransactionList.Add(new Transactions(i, check.Master, tmp));
             }
             return View("Transactions",TransactionList);
+        }
+
+        public IActionResult MakeUrl()
+        {
+            var url = new Url();
+            url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/SelectProducts";
+            return View(url);
+        }
+
+        public IActionResult SelectProducts()
+        {
+            return View(context.Product.ToList());
         }
     }
 }

@@ -103,7 +103,8 @@ C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\runtimes\win\
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csproj.CoreCompileInputs.cache
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csprojAssemblyReference.cache
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\EditProduct.cshtml.g.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\CalculateCheck.cshtml.g.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\Transactions.cshtml.g.cs
+C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\MakeUrl.cshtml.g.cs
+C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\SelectProducts.cshtml.g.cs

@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<CheckSeparatorMVC.Models.Product>
-
 @{
-    ViewData["Title"] = "Product list";
+    ViewData["Title"] = "Select Products";
 }
 
-<a asp-action="AddProduct">Add product</a>
+<h1>Products</h1>
+
+<h3>Select products from the list.</h3>
 
 <table>
     <thead>
@@ -42,18 +43,10 @@
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>
                     <td>
-                        <a asp-action="DeleteProduct" asp-route-id="@item.Id"> Delete </a> |
-                        <a asp-action="EditProduct" asp-route-id="@item.Id"> Edit </a>
+                        <input type="checkbox"/>
                     </td>
                 </tr>
             }
         }
     </tbody>
 </table>
-
-<a asp-action="CalculateCheck">Calculate Check</a>
-<br />
-<a asp-action="MakeUrl">Make URL for other people</a>
-
-
-
