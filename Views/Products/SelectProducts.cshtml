@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CheckSeparatorMVC.Models.Product>
+﻿@model CheckSeparatorMVC.Models.ProductAndUserViewModel
 @{
     ViewData["Title"] = "Select Products";
 }
@@ -7,46 +7,60 @@
 
 <h3>Select products from the list.</h3>
 
-<table>
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                Amount
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model is null)
+<form asp-for="ConfirmSelectedProducts">
+    <select>
+        @foreach (var item in Model.Names)
         {
-            <p class="ModelEmpty">
-                There is no products!
-            </p>
+            <option value="@item">@item</option>
         }
-        else
-        {
-            @foreach (var item in Model)
+    </select>
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Products is null)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Amount)
-                    </td>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
-                </tr>
+                <p class="ModelEmpty">
+                    There is no products!
+                </p>
             }
-        }
-    </tbody>
-</table>
+            else
+            {
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            <input type="checkbox" />
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <input type="submit" value="Confirm" class="btn btn-primary"/>
+</form>
+
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>

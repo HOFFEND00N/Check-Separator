@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace CheckSeparatorMVC.Controllers
 {
@@ -39,8 +40,6 @@ namespace CheckSeparatorMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = await context.Product.FirstOrDefaultAsync(p => p.Id == id);
@@ -92,7 +91,8 @@ namespace CheckSeparatorMVC.Controllers
             {
                 TransactionList.Add(new Transactions(i, check.Master, tmp));
             }
-            return View("Transactions",TransactionList);
+            return View("SelectProducts", new ProductAndUserViewModel(context.Product.ToList(),
+                check.Names.Split(" ").ToList()));
         }
 
         public IActionResult MakeUrl()
@@ -105,6 +105,13 @@ namespace CheckSeparatorMVC.Controllers
         public IActionResult SelectProducts()
         {
             return View(context.Product.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ConfirmSelectedProducts(FormCollection formCollection)
+        {
+            return View("SelectProducts");
         }
     }
 }
