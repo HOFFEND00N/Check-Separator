@@ -1,13 +1,9 @@
-﻿using System;
-using System.Web;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CheckSeparatorMVC.Data;
 using CheckSeparatorMVC.Models;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 
@@ -15,12 +11,14 @@ namespace CheckSeparatorMVC.Controllers
 {
     public class ProductsController : Controller
     {
+        private List<ProductAndUserViewModel> userAndPurchase = new List<ProductAndUserViewModel>();
+
         private readonly CheckSeparatorMvcContext context;
         public ProductsController(CheckSeparatorMvcContext context)
         {
             this.context = context;
         }
-       
+
         public async Task<IActionResult> Index()
         {
             return View(await context.Product.ToListAsync());
@@ -33,7 +31,7 @@ namespace CheckSeparatorMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddProduct([Bind("Price,Amount,Name")] Product product)
+        public async Task<IActionResult> AddProduct(Product product)
         {
             context.Add(product);
             await context.SaveChangesAsync();
@@ -64,7 +62,7 @@ namespace CheckSeparatorMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProduct(int id, [Bind("Price,Amount,Name,Id")] Product product)
+        public async Task<IActionResult> EditProduct(Product product)
         {
             context.Product.Update(product);
             await context.SaveChangesAsync();
@@ -81,37 +79,43 @@ namespace CheckSeparatorMVC.Controllers
         public IActionResult CalculateCheck(Check check)
         {
             double sum = 0;
-            foreach(var i in context.Product)
+            foreach (var i in context.Product)
             {
                 sum += i.Price * i.Amount;
             }
             var tmp = sum / check.Count;
             var TransactionList = new List<Transactions>();
-            foreach(var i in check.Names.Split(" "))
+            foreach (var i in check.Names.Split(" "))
             {
                 TransactionList.Add(new Transactions(i, check.Master, tmp));
             }
-            return View("SelectProducts", new ProductAndUserViewModel(context.Product.ToList(),
-                check.Names.Split(" ").ToList()));
+            return View("SelectProducts", context.Product.ToList());
         }
 
         public IActionResult MakeUrl()
         {
             var url = new Url();
-            url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/SelectProducts";
+            url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/EnterUserName";
             return View(url);
         }
 
-        public IActionResult SelectProducts()
+        public IActionResult SelectProducts(ProductAndUserViewModel model)
         {
-            return View(context.Product.ToList());
+            return View(new ProductAndUserViewModel(context.Product.ToList(), model.UserName));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ConfirmSelectedProducts(FormCollection formCollection)
+        public IActionResult ConfirmSelectedProducts(string UserName, IEnumerable<Product> product)
         {
+            //userAndPurchase.Add(model);
             return View("SelectProducts");
+        }
+
+        public IActionResult EnterUserName()
+        {
+            return View();
         }
     }
 }
+ 

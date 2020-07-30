@@ -5,16 +5,11 @@
 
 <h1>Products</h1>
 
+<h2>Your name: @Model.UserName</h2>
+
 <h3>Select products from the list.</h3>
 
-<form asp-for="ConfirmSelectedProducts">
-    <select>
-        @foreach (var item in Model.Names)
-        {
-            <option value="@item">@item</option>
-        }
-    </select>
-
+<form asp-action="ConfirmSelectedProducts" asp-controller="Products">
     <table>
         <thead>
             <tr>
@@ -51,13 +46,16 @@
                             @Html.DisplayFor(modelItem => item.Amount)
                         </td>
                         <td>
-                            <input type="checkbox" />
+                            <input type="checkbox" name="Name" value="@item.Name" />
+                            <input type="hidden" name="Price" value="@item.Price" />
+                            <input type="hidden" name="Amount" value="@item.Amount" />
                         </td>
                     </tr>
                 }
             }
         </tbody>
     </table>
+    <input type="hidden" name="UserName" value="@Model.UserName"/>
 
     <input type="submit" value="Confirm" class="btn btn-primary"/>
 </form>
