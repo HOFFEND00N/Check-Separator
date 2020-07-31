@@ -19,9 +19,9 @@ namespace CheckSeparatorMVC.Controllers
             this.context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await context.Product.ToListAsync());
+            return View(context.Product.ToList());
         }
 
         public IActionResult AddProduct()
@@ -106,7 +106,7 @@ namespace CheckSeparatorMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ConfirmSelectedProducts(string UserName, IEnumerable<Product> product)
+        public IActionResult ConfirmSelectedProducts(string userName, Product[] product)
         {
             //userAndPurchase.Add(model);
             return View("SelectProducts");

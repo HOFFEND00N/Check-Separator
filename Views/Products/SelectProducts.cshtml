@@ -46,18 +46,19 @@
                             @Html.DisplayFor(modelItem => item.Amount)
                         </td>
                         <td>
-                            <input type="checkbox" name="Name" value="@item.Name" />
-                            <input type="hidden" name="Price" value="@item.Price" />
-                            <input type="hidden" name="Amount" value="@item.Amount" />
+                            <input type="checkbox" name="Products.Name" value="@item.Name" />
+                            <input type="hidden" name="Products.Price" value="@item.Price" />
+                            <input type="hidden" name="Products.Amount" value="@item.Amount" />
+                            <input type="hidden" name="Products.Id" value="@item.Id" />
                         </td>
                     </tr>
                 }
             }
         </tbody>
     </table>
-    <input type="hidden" name="UserName" value="@Model.UserName"/>
+    <input type="hidden" name="UserName" value="@Model.UserName" />
 
-    <input type="submit" value="Confirm" class="btn btn-primary"/>
+    <input type="submit" value="Confirm" class="btn btn-primary" onclick="Test();" />
 </form>
 
 
