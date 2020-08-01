@@ -1,19 +1,18 @@
-﻿@model CheckSeparatorMVC.Models.ProductAndUserViewModel
+﻿@model CheckSeparatorMVC.Models.ProductViewModel
 @{
     ViewData["Title"] = "Select Products";
 }
 
 <h1>Products</h1>
 
-<h3>Select products from the list.</h3>
+<form asp-action="ConfirmSelectedProducts" asp-controller="Products">
 
-<form asp-for="ConfirmSelectedProducts">
-    <select>
-        @foreach (var item in Model.Names)
-        {
-            <option value="@item">@item</option>
-        }
-    </select>
+    <h3>Type your name please.</h3>
+
+    <label>Name</label>
+    <input type="text" name="userName" />
+
+    <h3>Select products from the list.</h3>
 
     <table>
         <thead>
@@ -51,7 +50,10 @@
                             @Html.DisplayFor(modelItem => item.Amount)
                         </td>
                         <td>
-                            <input type="checkbox" />
+                            <input type="checkbox" name="Name" value="@item.Name" />
+                            <input type="hidden" name="Price" value="@item.Price" />
+                            <input type="hidden" name="Amount" value="@item.Amount" />
+                            <input type="hidden" name="Id" value="@item.Id" />
                         </td>
                     </tr>
                 }
@@ -59,7 +61,7 @@
         </tbody>
     </table>
 
-    <input type="submit" value="Confirm" class="btn btn-primary"/>
+    <input type="submit" value="Confirm" class="btn btn-primary" onclick="Test();" />
 </form>
 
 
