@@ -24,12 +24,23 @@ namespace CheckSeparatorMVC.Models
         [StringLength(100, MinimumLength = 1)]
         public string Name { get; set; }
 
+        public bool IsChecked { get; set; }
         public Product()
         {
             Id = 0;
             Price = 0;
             Amount = 0;
             Name = "";
+            IsChecked = false;
+        }
+
+        public Product(int id, string name, double price, int amount, bool isChecked)
+        {
+            Id = id;
+            Price = price;
+            Name = name;
+            Amount = amount;
+            IsChecked = isChecked;
         }
     }
 }

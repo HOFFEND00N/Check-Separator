@@ -7,8 +7,8 @@ namespace CheckSeparatorMVC.Models
 {
     public class Check
     {
+        public int Id { get; set; }
         public string Master { get; set; }
-        public int Count { get; set; }
         public string Names { get; set; }
     }
 }

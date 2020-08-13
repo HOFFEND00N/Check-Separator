@@ -10,7 +10,7 @@
     <h3>Type your name please.</h3>
 
     <label>Name</label>
-    <input type="text" name="userName" />
+    <input type="text" name="model.userName" />
 
     <h3>Select products from the list.</h3>
 
@@ -37,23 +37,24 @@
             }
             else
             {
-                @foreach (var item in Model.Products)
+                @for (int i = 0; i < Model.Products.Count; i++)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            @Html.DisplayFor(modelItem => Model.Products[i].Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Price)
+                            @Html.DisplayFor(modelItem => Model.Products[i].Price)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Amount)
+                            @Html.DisplayFor(modelItem => Model.Products[i].Amount)
                         </td>
                         <td>
-                            <input type="checkbox" name="Name" value="@item.Name" />
-                            <input type="hidden" name="Price" value="@item.Price" />
-                            <input type="hidden" name="Amount" value="@item.Amount" />
-                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input type="checkbox" name="model.Products[@i].IsChecked" value="true" />
+                            <input type="hidden" name="model.Products[@i].Name" value="@Model.Products[i].Name" />
+                            <input type="hidden" name="model.Products[@i].Price" value="@Model.Products[i].Price" />
+                            <input type="hidden" name="model.Products[@i].Amount" value="@Model.Products[i].Amount" />
+                            <input type="hidden" name="model.Products[@i].Id" value="@Model.Products[i].Id" />
                         </td>
                     </tr>
                 }

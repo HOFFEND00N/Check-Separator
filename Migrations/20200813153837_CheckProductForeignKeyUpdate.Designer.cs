@@ -3,14 +3,16 @@ using CheckSeparatorMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CheckSeparatorMVC.Migrations
 {
     [DbContext(typeof(CheckSeparatorMvcContext))]
-    partial class CheckSeparatorMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20200813153837_CheckProductForeignKeyUpdate")]
+    partial class CheckProductForeignKeyUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,9 +47,9 @@ namespace CheckSeparatorMVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProductId", "CheckId", "UserName");
+                    b.HasKey("ProductId", "CheckId");
 
                     b.ToTable("Check_Product");
                 });

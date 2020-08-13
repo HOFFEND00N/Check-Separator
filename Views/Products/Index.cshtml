@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model is null)
+        @if (Model is null || Model.Count() == 0)
         {
             <p class="ModelEmpty">
                 There is no products!

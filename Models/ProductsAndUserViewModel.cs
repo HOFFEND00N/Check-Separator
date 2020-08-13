@@ -2,18 +2,20 @@
 
 namespace CheckSeparatorMVC.Models
 {
-    public class ProductAndUserViewModel
+    public class ProductsAndUserViewModel
     {
-        public IEnumerable<Product> Products { get; set; }
+        public int Id { get; set; }
+
+        public List<Product> Products { get; set; }
 
         public string UserName { get; set; }
-        public ProductAndUserViewModel()
+        public ProductsAndUserViewModel()
         {
             Products = new List<Product>();
             UserName = "";
         }
 
-        public ProductAndUserViewModel(IEnumerable<Product> products, string name)
+        public ProductsAndUserViewModel(List<Product> products, string name)
         {
             Products = products;
             UserName = name;

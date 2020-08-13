@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CheckSeparatorMVC.Data;
 using CheckSeparatorMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 
 namespace CheckSeparatorMVC.Controllers
 {
     public class ProductsController : Controller
     {
-        private List<ProductAndUserViewModel> userAndPurchase = new List<ProductAndUserViewModel>();
-
+        public int curCheckId = 1;
         private readonly CheckSeparatorMvcContext context;
         public ProductsController(CheckSeparatorMvcContext context)
         {
@@ -31,65 +28,68 @@ namespace CheckSeparatorMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddProduct(Product product)
+        public IActionResult AddProduct(Product product)
         {
-            context.Add(product);
-            await context.SaveChangesAsync();
+            context.Product.Add(product);
+            context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> DeleteProduct(int id)
+        public IActionResult DeleteProduct(int id)
         {
-            var product = await context.Product.FirstOrDefaultAsync(p => p.Id == id);
+            var product = context.Product.FirstOrDefault(p => p.Id == id);
             return View(product);
         }
 
         [HttpPost, ActionName("DeleteProduct")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var product = await context.Product.FindAsync(id);
+            var product = context.Product.Find(id);
+            var checkProduct = context.Check_Product.Find(product.Id, curCheckId);
+            context.Check_Product.Remove(checkProduct);
             context.Product.Remove(product);
-            await context.SaveChangesAsync();
+            context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> EditProduct(int id)
+        public IActionResult EditProduct(int id)
         {
-            var product = await context.Product.FindAsync(id);
+            var product = context.Product.Find(id);
             return View(product);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProduct(Product product)
+        public IActionResult EditProduct(Product product)
         {
             context.Product.Update(product);
-            await context.SaveChangesAsync();
+            context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult CalculateCheck()
         {
-            return View();
-        }
+            Dictionary<int, int> productCnt = new Dictionary<int, int>();
+            foreach (var item in context.Check_Product.ToList())
+            {
+                if (productCnt.ContainsKey(item.ProductId))
+                    productCnt[item.ProductId]++;
+                else
+                    productCnt.Add(item.ProductId, 1);
+            }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CalculateCheck(Check check)
-        {
-            double sum = 0;
-            foreach (var i in context.Product)
+            List<Transactions> transactions = new List<Transactions>();
+            foreach (var item in context.Check_Product.ToList())
             {
-                sum += i.Price * i.Amount;
+                if (productCnt.ContainsKey(item.ProductId))
+                {
+                    var product = context.Product.Find(item.ProductId);
+                    var tmp = (product.Price * product.Amount) / productCnt[item.ProductId];
+                    transactions.Add(new Transactions(item.UserName, "admin", tmp));
+                }
             }
-            var tmp = sum / check.Count;
-            var TransactionList = new List<Transactions>();
-            foreach (var i in check.Names.Split(" "))
-            {
-                TransactionList.Add(new Transactions(i, check.Master, tmp));
-            }
-            return View("SelectProducts", context.Product.ToList());
+            return View("Transactions", transactions);
         }
 
         public IActionResult MakeUrl()
@@ -106,11 +106,16 @@ namespace CheckSeparatorMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ConfirmSelectedProducts(string userName, ProductViewModel Products)
+        public IActionResult ConfirmSelectedProducts(ProductsAndUserViewModel model)
         {
-            //userAndPurchase.Add(model);
-            return View("SelectProducts");
+            context.Checks.Find(1).Names += model.UserName;
+            foreach (var i in model.Products)
+            {
+                if (i.IsChecked == true)
+                    context.Check_Product.Add(new Check_Product(i.Id, curCheckId, model.UserName));
+            }
+            context.SaveChanges();
+            return View("SelectProducts", new ProductViewModel(context.Product.ToList()));
         }
     }
 }
- 

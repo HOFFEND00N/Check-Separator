@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using CheckSeparatorMVC.Models;
- 
+
 
 namespace CheckSeparatorMVC.Data
 {
@@ -15,6 +11,14 @@ namespace CheckSeparatorMVC.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Check_Product>()
+                .HasKey(c => new { c.ProductId, c.CheckId, c.UserName});
+        }
+
         public DbSet<Product> Product { get; set; }
+        public DbSet<Check> Checks { get; set; }
+        public DbSet<Check_Product> Check_Product { get; set; }
     }
 }
