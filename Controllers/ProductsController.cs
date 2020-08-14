@@ -46,8 +46,10 @@ namespace CheckSeparatorMVC.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             var product = context.Product.Find(id);
-            var checkProduct = context.Check_Product.Find(product.Id, curCheckId);
-            context.Check_Product.Remove(checkProduct);
+            List<Check_Product> checkProductToDelete = new List<Check_Product>();
+            foreach (var item in context.Check_Product)
+                if (item.ProductId == product.Id)
+                    context.Check_Product.Remove(item);
             context.Product.Remove(product);
             context.SaveChanges();
             return RedirectToAction(nameof(Index));
