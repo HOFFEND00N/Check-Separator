@@ -3,14 +3,16 @@ using CheckSeparatorMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CheckSeparatorMVC.Migrations
 {
     [DbContext(typeof(CheckSeparatorMvcContext))]
-    partial class CheckSeparatorMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20200825201903_dataBaseRemake")]
+    partial class dataBaseRemake
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +22,7 @@ namespace CheckSeparatorMVC.Migrations
 
             modelBuilder.Entity("CheckSeparatorMVC.Models.Check", b =>
                 {
-                    b.Property<int>("CheckId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -28,7 +30,7 @@ namespace CheckSeparatorMVC.Migrations
                     b.Property<string>("OwnerName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CheckId");
+                    b.HasKey("Id");
 
                     b.ToTable("Checks");
                 });
@@ -50,7 +52,7 @@ namespace CheckSeparatorMVC.Migrations
 
             modelBuilder.Entity("CheckSeparatorMVC.Models.Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -69,7 +71,7 @@ namespace CheckSeparatorMVC.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CheckId");
 

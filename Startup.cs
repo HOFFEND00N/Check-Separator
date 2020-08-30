@@ -25,6 +25,8 @@ namespace CheckSeparatorMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
             services.AddControllersWithViews();
 
             services.AddDbContext<CheckSeparatorMvcContext>(options =>
@@ -53,6 +55,9 @@ namespace CheckSeparatorMVC
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "Products",
+                    pattern: "{controller=Products}/{action=ProductMenu}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

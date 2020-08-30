@@ -8,7 +8,7 @@ namespace CheckSeparatorMVC.Models
 {
     public class Product
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
 
         [DataType(DataType.Currency)]
         [Range(1,1000000)]
@@ -24,23 +24,26 @@ namespace CheckSeparatorMVC.Models
         [StringLength(100, MinimumLength = 1)]
         public string Name { get; set; }
 
-        public bool IsChecked { get; set; }
+        public int CheckId { get; set; }
+
+        public Check Check { get; set; }
         public Product()
         {
-            Id = 0;
+            ProductId = 0;
             Price = 0;
             Amount = 0;
             Name = "";
-            IsChecked = false;
         }
-
+        public Product(int checkId)
+        {
+            CheckId = checkId;
+        }
         public Product(int id, string name, double price, int amount, bool isChecked)
         {
-            Id = id;
+            ProductId = id;
             Price = price;
             Name = name;
             Amount = amount;
-            IsChecked = isChecked;
         }
     }
 }
