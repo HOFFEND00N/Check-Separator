@@ -1,24 +1,5 @@
-﻿@model CheckSeparatorMVC.Models.Check
+﻿@model CheckSeparatorMVC.Models.Transactions
 @{
     ViewData["Title"] = "Calculate Check";
 }
 
-<form asp-action="CalculateCheck" asp-controller="Products">
-    <h1>Enter your name</h1>
-    <div>
-        <input asp-for="Master"/>
-    </div>
-    
-    <h1>Enter number of people.</h1>
-
-    <div class="form-group">
-        <input asp-for="Count" />
-    </div>
-
-    <h1>Enter their names separated by space.</h1>
-    <div class="form-group">
-        <input asp-for="Names" />
-    </div>
-
-    <input type="submit" value="Calculate Check" class="btn btn-primary" />
-</form>

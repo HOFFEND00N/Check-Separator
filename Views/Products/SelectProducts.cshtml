@@ -1,15 +1,19 @@
-﻿@model CheckSeparatorMVC.Models.ProductAndUserViewModel
+﻿@model CheckSeparatorMVC.Models.Check
 @{
     ViewData["Title"] = "Select Products";
 }
 
 <h1>Products</h1>
 
-<h2>Your name: @Model.UserName</h2>
-
-<h3>Select products from the list.</h3>
-
 <form asp-action="ConfirmSelectedProducts" asp-controller="Products">
+
+    <h3>Type your name please.</h3>
+
+    <label>Name</label>
+    <input type="text" name="userName" />
+
+    <h3>Select products from the list.</h3>
+
     <table>
         <thead>
             <tr>
@@ -33,32 +37,35 @@
             }
             else
             {
-                @foreach (var item in Model.Products)
+                @for (int i = 0; i < Model.Products.Count; i++)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            @Html.DisplayFor(modelItem => Model.Products[i].Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Price)
+                            @Html.DisplayFor(modelItem => Model.Products[i].Price)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Amount)
+                            @Html.DisplayFor(modelItem => Model.Products[i].Amount)
                         </td>
                         <td>
-                            <input type="checkbox" name="Products.Name" value="@item.Name" />
-                            <input type="hidden" name="Products.Price" value="@item.Price" />
-                            <input type="hidden" name="Products.Amount" value="@item.Amount" />
-                            <input type="hidden" name="Products.Id" value="@item.Id" />
+                            <input type="checkbox" name="model.Products[@i].IsChecked" value="true" />
+                            <input type="hidden" name="model.Products[@i].Name" value="@Model.Products[i].Name" />
+                            <input type="hidden" name="model.Products[@i].Price" value="@Model.Products[i].Price" />
+                            <input type="hidden" name="model.Products[@i].Amount" value="@Model.Products[i].Amount" />
+                            <input type="hidden" name="model.Products[@i].ProductId" value="@Model.Products[i].ProductId" />
+                            <input type="hidden" name="model.Products[@i].CheckId" value="@Model.Products[i].CheckId" />
                         </td>
                     </tr>
                 }
             }
         </tbody>
     </table>
-    <input type="hidden" name="UserName" value="@Model.UserName" />
 
-    <input type="submit" value="Confirm" class="btn btn-primary" onclick="Test();" />
+    <input type="hidden" name="model.OwnerName" value="@Model.OwnerName" />
+    <input type="hidden" name="model.CheckId" value="@Model.CheckId" />
+    <input type="submit" value="Confirm" class="btn btn-primary" />
 </form>
 
 

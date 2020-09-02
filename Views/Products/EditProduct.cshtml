@@ -21,6 +21,8 @@
         <label asp-for="Amount"></label>
         <input asp-for="Amount" />
     </div>
+    <input type="hidden" name="CheckId" value="@Model.CheckId">
+    <input type="hidden" name="ProductId" value="@Model.ProductId">
     <input type="submit" value="EditProduct" class="btn btn-primary" />
 </form>
 

@@ -1,18 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using CheckSeparatorMVC.Data;
 using CheckSeparatorMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using System.Data;
 
 namespace CheckSeparatorMVC.Controllers
 {
     public class ProductsController : Controller
     {
-        private List<ProductAndUserViewModel> userAndPurchase = new List<ProductAndUserViewModel>();
-
         private readonly CheckSeparatorMvcContext context;
         public ProductsController(CheckSeparatorMvcContext context)
         {
@@ -21,101 +17,139 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult Index()
         {
-            return View(context.Product.ToList());
+            return View();
         }
 
-        public IActionResult AddProduct()
+        public IActionResult CheckProducts(int CheckId)
+        {
+            var Check = context.Checks.Find(CheckId);
+            if (Check is null)
+                return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
+            Check.Products = context.Product.Where(product => product.CheckId == CheckId).ToList();
+            return View(Check);
+        }
+
+        public IActionResult FindCheck(int checkId)
+        {
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = checkId });
+        }
+
+        public IActionResult CreateCheck()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddProduct(Product product)
+        public IActionResult CreateCheck(string name)
         {
-            context.Add(product);
-            await context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var tmp = new Check(name);
+            context.Checks.Add(tmp);
+            context.SaveChanges();
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = tmp.CheckId });
         }
 
-        public async Task<IActionResult> DeleteProduct(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ViewAddProduct(int CheckId)
         {
-            var product = await context.Product.FirstOrDefaultAsync(p => p.Id == id);
+            return View("AddProduct", new Product(CheckId));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddProduct(Product product)
+        {
+            context.Product.Add(product);
+            context.Checks.Find(product.CheckId).Products.Add(product);
+            context.SaveChanges();
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
+        }
+
+        public IActionResult DeleteProduct(int id)
+        {
+            var product = context.Product.FirstOrDefault(p => p.ProductId == id);
             return View(product);
         }
 
         [HttpPost, ActionName("DeleteProduct")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var product = await context.Product.FindAsync(id);
+            var product = context.Product.Find(id);
             context.Product.Remove(product);
-            await context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            context.SaveChanges();
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
 
-        public async Task<IActionResult> EditProduct(int id)
+        public IActionResult EditProduct(int id)
         {
-            var product = await context.Product.FindAsync(id);
+            var product = context.Product.Find(id);
             return View(product);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProduct(Product product)
+        public IActionResult EditProduct(Product product)
         {
             context.Product.Update(product);
-            await context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            context.SaveChanges();
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
 
-        public IActionResult CalculateCheck()
-        {
-            return View();
-        }
+        //public IActionResult CalculateCheck()
+        //{
+        //    Dictionary<int, int> productCnt = new Dictionary<int, int>();
+        //    foreach (var item in context.Check_Product.ToList())
+        //    {
+        //        if (productCnt.ContainsKey(item.ProductId))
+        //            productCnt[item.ProductId]++;
+        //        else
+        //            productCnt.Add(item.ProductId, 1);
+        //    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CalculateCheck(Check check)
-        {
-            double sum = 0;
-            foreach (var i in context.Product)
-            {
-                sum += i.Price * i.Amount;
-            }
-            var tmp = sum / check.Count;
-            var TransactionList = new List<Transactions>();
-            foreach (var i in check.Names.Split(" "))
-            {
-                TransactionList.Add(new Transactions(i, check.Master, tmp));
-            }
-            return View("SelectProducts", context.Product.ToList());
-        }
+        //    List<Transactions> transactions = new List<Transactions>();
+        //    foreach (var item in context.Check_Product.ToList())
+        //    {
+        //        if (productCnt.ContainsKey(item.ProductId))
+        //        {
+        //            var product = context.Product.Find(item.ProductId);
+        //            var tmp = (product.Price * product.Amount) / productCnt[item.ProductId];
+        //            transactions.Add(new Transactions(item.UserName, "admin", tmp));
+        //        }
+        //    }
+        //    return View("Transactions", transactions);
+        //}
 
-        public IActionResult MakeUrl()
+        public IActionResult MakeUrl(int CheckId)
         {
             var url = new Url();
-            url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/EnterUserName";
+            url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/SelectProducts/" + CheckId;
             return View(url);
         }
 
-        public IActionResult SelectProducts(ProductAndUserViewModel model)
+        public IActionResult SelectProducts(int CheckId)
         {
-            return View(new ProductAndUserViewModel(context.Product.ToList(), model.UserName));
+            var Check = context.Checks.Find(CheckId);
+            if (Check is null)
+                return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
+            Check.Products = context.Product.Where(product => product.CheckId == CheckId).ToList();
+            return View(Check);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ConfirmSelectedProducts(string userName, Product[] product)
+        public IActionResult ConfirmSelectedProducts(Check model, string userName)
         {
-            //userAndPurchase.Add(model);
-            return View("SelectProducts");
-        }
-
-        public IActionResult EnterUserName()
-        {
-            return View();
+            var user = new Models.User(userName);
+            context.Users.Add(user);
+            context.SaveChanges();
+            context.checkUsers.Add(new CheckUser(model.CheckId, user.UserId));
+            foreach(var i in model.Products)
+                if (i.IsChecked == true)
+                    context.productUsers.Add(new ProductUser(user.UserId, i.ProductId));
+            context.SaveChanges();
+            return View("Index");
         }
     }
 }
- 

@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CheckSeparatorMVC.Models
 {
-    public class ProductAndUserViewModel
+    public class ProductsAndUserViewModel
     {
+        public int Id { get; set; }
+
         public List<Product> Products { get; set; }
 
         public string UserName { get; set; }
-        public ProductAndUserViewModel()
+        public ProductsAndUserViewModel()
         {
             Products = new List<Product>();
             UserName = "";
         }
 
-        public ProductAndUserViewModel(List<Product> products, string name)
+        public ProductsAndUserViewModel(List<Product> products, string name)
         {
             Products = products;
             UserName = name;
