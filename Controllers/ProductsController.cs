@@ -4,6 +4,7 @@ using CheckSeparatorMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Data;
+using System.Collections.Generic;
 
 namespace CheckSeparatorMVC.Controllers
 {
@@ -97,29 +98,38 @@ namespace CheckSeparatorMVC.Controllers
             return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
 
-        //public IActionResult CalculateCheck()
-        //{
-        //    Dictionary<int, int> productCnt = new Dictionary<int, int>();
-        //    foreach (var item in context.Check_Product.ToList())
-        //    {
-        //        if (productCnt.ContainsKey(item.ProductId))
-        //            productCnt[item.ProductId]++;
-        //        else
-        //            productCnt.Add(item.ProductId, 1);
-        //    }
+        public IActionResult CalculateCheck(int CheckId)
+        {
+            var check = context.Checks.Find(CheckId);
+            var products = context.Product.Where(p => p.CheckId == CheckId);
+            var users = context.checkUsers.Where(cu => cu.CheckId == CheckId);
+            Dictionary<int, int> productCnt = new Dictionary<int, int>();
 
-        //    List<Transactions> transactions = new List<Transactions>();
-        //    foreach (var item in context.Check_Product.ToList())
-        //    {
-        //        if (productCnt.ContainsKey(item.ProductId))
-        //        {
-        //            var product = context.Product.Find(item.ProductId);
-        //            var tmp = (product.Price * product.Amount) / productCnt[item.ProductId];
-        //            transactions.Add(new Transactions(item.UserName, "admin", tmp));
-        //        }
-        //    }
-        //    return View("Transactions", transactions);
-        //}
+            foreach(var i in users)
+            {
+                var selectedProducts = context.productUsers.Where(pu => pu.UserId == i.UserId)
+            }
+
+            foreach (var item in context.Check_Product.ToList())
+            {
+                if (productCnt.ContainsKey(item.ProductId))
+                    productCnt[item.ProductId]++;
+                else
+                    productCnt.Add(item.ProductId, 1);
+            }
+
+            List<Transactions> transactions = new List<Transactions>();
+            foreach (var item in context.Check_Product.ToList())
+            {
+                if (productCnt.ContainsKey(item.ProductId))
+                {
+                    var product = context.Product.Find(item.ProductId);
+                    var tmp = (product.Price * product.Amount) / productCnt[item.ProductId];
+                    transactions.Add(new Transactions(item.UserName, "admin", tmp));
+                }
+            }
+            return View("Transactions", transactions);
+        }
 
         public IActionResult MakeUrl(int CheckId)
         {
