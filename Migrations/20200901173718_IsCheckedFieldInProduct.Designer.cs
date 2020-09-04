@@ -3,14 +3,16 @@ using CheckSeparatorMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CheckSeparatorMVC.Migrations
 {
     [DbContext(typeof(CheckSeparatorMvcContext))]
-    partial class CheckSeparatorMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20200901173718_IsCheckedFieldInProduct")]
+    partial class IsCheckedFieldInProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace CheckSeparatorMVC.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("checkUsers");
+                    b.ToTable("CheckUser");
                 });
 
             modelBuilder.Entity("CheckSeparatorMVC.Models.Product", b =>
@@ -77,21 +79,6 @@ namespace CheckSeparatorMVC.Migrations
                     b.HasIndex("CheckId");
 
                     b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("CheckSeparatorMVC.Models.ProductUser", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("productUsers");
                 });
 
             modelBuilder.Entity("CheckSeparatorMVC.Models.User", b =>
@@ -129,21 +116,6 @@ namespace CheckSeparatorMVC.Migrations
                     b.HasOne("CheckSeparatorMVC.Models.Check", "Check")
                         .WithMany("Products")
                         .HasForeignKey("CheckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CheckSeparatorMVC.Models.ProductUser", b =>
-                {
-                    b.HasOne("CheckSeparatorMVC.Models.Product", "Product")
-                        .WithMany("ProductUsers")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CheckSeparatorMVC.Models.User", "User")
-                        .WithMany("ProductUsers")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,4 +1,4 @@
-﻿@model CheckSeparatorMVC.Models.ProductViewModel
+﻿@model CheckSeparatorMVC.Models.Check
 @{
     ViewData["Title"] = "Select Products";
 }
@@ -10,7 +10,7 @@
     <h3>Type your name please.</h3>
 
     <label>Name</label>
-    <input type="text" name="model.userName" />
+    <input type="text" name="userName" />
 
     <h3>Select products from the list.</h3>
 
@@ -54,7 +54,8 @@
                             <input type="hidden" name="model.Products[@i].Name" value="@Model.Products[i].Name" />
                             <input type="hidden" name="model.Products[@i].Price" value="@Model.Products[i].Price" />
                             <input type="hidden" name="model.Products[@i].Amount" value="@Model.Products[i].Amount" />
-                            <input type="hidden" name="model.Products[@i].Id" value="@Model.Products[i].ProductId" />
+                            <input type="hidden" name="model.Products[@i].ProductId" value="@Model.Products[i].ProductId" />
+                            <input type="hidden" name="model.Products[@i].CheckId" value="@Model.Products[i].CheckId" />
                         </td>
                     </tr>
                 }
@@ -62,6 +63,8 @@
         </tbody>
     </table>
 
+    <input type="hidden" name="model.OwnerName" value="@Model.OwnerName" />
+    <input type="hidden" name="model.CheckId" value="@Model.CheckId" />
     <input type="submit" value="Confirm" class="btn btn-primary" />
 </form>
 

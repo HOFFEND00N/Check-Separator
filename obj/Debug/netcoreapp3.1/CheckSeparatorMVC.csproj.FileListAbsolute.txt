@@ -184,9 +184,10 @@ C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\staticwebass
 C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.dll
 C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.pdb
 C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.genruntimeconfig.cache
-C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csprojAssemblyReference.cache
-C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\EnterUserName.cshtml.g.cs
 C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\CreateCheck.cshtml.g.cs
 C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\Error.cshtml.g.cs
 C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csprojAssemblyReference.cache
 C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\CheckProducts.cshtml.g.cs
+C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\CheckProducts.cshtml.g.cs
+C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\CreateCheck.cshtml.g.cs
+C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\Error.cshtml.g.cs

@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using CheckSeparatorMVC.Data;
 using CheckSeparatorMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Data;
-using System.Web;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http.Extensions;
+using System.Collections.Generic;
 
 namespace CheckSeparatorMVC.Controllers
 {
@@ -24,18 +20,19 @@ namespace CheckSeparatorMVC.Controllers
         {
             return View();
         }
-      
-        public IActionResult CheckProducts(int id)
+
+        public IActionResult CheckProducts(int CheckId)
         {
-            var check = context.Checks.Find(id);
-            if (check is null)
+            var Check = context.Checks.Find(CheckId);
+            if (Check is null)
                 return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
-            return View(check);
+            Check.Products = context.Product.Where(product => product.CheckId == CheckId).ToList();
+            return View(Check);
         }
 
         public IActionResult FindCheck(int checkId)
         {
-            return RedirectToAction(nameof(CheckProducts), new { id = checkId } );
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = checkId });
         }
 
         public IActionResult CreateCheck()
@@ -50,7 +47,7 @@ namespace CheckSeparatorMVC.Controllers
             var tmp = new Check(name);
             context.Checks.Add(tmp);
             context.SaveChanges();
-            return RedirectToAction(nameof(CheckProducts), new { id = tmp.CheckId });
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = tmp.CheckId });
         }
 
         [HttpPost]
@@ -67,7 +64,7 @@ namespace CheckSeparatorMVC.Controllers
             context.Product.Add(product);
             context.Checks.Find(product.CheckId).Products.Add(product);
             context.SaveChanges();
-            return RedirectToAction(nameof(CheckProducts), new { id = product.CheckId });
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
 
         public IActionResult DeleteProduct(int id)
@@ -81,10 +78,9 @@ namespace CheckSeparatorMVC.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             var product = context.Product.Find(id);
-            context.Checks.Find(product.CheckId).Products.Remove(product);
             context.Product.Remove(product);
             context.SaveChanges();
-            return RedirectToAction(nameof(CheckProducts));
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
 
         public IActionResult EditProduct(int id)
@@ -99,57 +95,71 @@ namespace CheckSeparatorMVC.Controllers
         {
             context.Product.Update(product);
             context.SaveChanges();
-            return RedirectToAction(nameof(CheckProducts));
+            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
 
-        //public IActionResult CalculateCheck()
-        //{
-        //    Dictionary<int, int> productCnt = new Dictionary<int, int>();
-        //    foreach (var item in context.Check_Product.ToList())
-        //    {
-        //        if (productCnt.ContainsKey(item.ProductId))
-        //            productCnt[item.ProductId]++;
-        //        else
-        //            productCnt.Add(item.ProductId, 1);
-        //    }
+        public IActionResult CalculateCheck(int CheckId)
+        {
+            var check = context.Checks.Find(CheckId);
+            var products = context.Product.Where(p => p.CheckId == CheckId);
+            var users = context.checkUsers.Where(cu => cu.CheckId == CheckId);
+            Dictionary<int, int> productCnt = new Dictionary<int, int>();
 
-        //    List<Transactions> transactions = new List<Transactions>();
-        //    foreach (var item in context.Check_Product.ToList())
-        //    {
-        //        if (productCnt.ContainsKey(item.ProductId))
-        //        {
-        //            var product = context.Product.Find(item.ProductId);
-        //            var tmp = (product.Price * product.Amount) / productCnt[item.ProductId];
-        //            transactions.Add(new Transactions(item.UserName, "admin", tmp));
-        //        }
-        //    }
-        //    return View("Transactions", transactions);
-        //}
+            foreach(var i in users)
+            {
+                var selectedProducts = context.productUsers.Where(pu => pu.UserId == i.UserId)
+            }
 
-        public IActionResult MakeUrl()
+            foreach (var item in context.Check_Product.ToList())
+            {
+                if (productCnt.ContainsKey(item.ProductId))
+                    productCnt[item.ProductId]++;
+                else
+                    productCnt.Add(item.ProductId, 1);
+            }
+
+            List<Transactions> transactions = new List<Transactions>();
+            foreach (var item in context.Check_Product.ToList())
+            {
+                if (productCnt.ContainsKey(item.ProductId))
+                {
+                    var product = context.Product.Find(item.ProductId);
+                    var tmp = (product.Price * product.Amount) / productCnt[item.ProductId];
+                    transactions.Add(new Transactions(item.UserName, "admin", tmp));
+                }
+            }
+            return View("Transactions", transactions);
+        }
+
+        public IActionResult MakeUrl(int CheckId)
         {
             var url = new Url();
-            url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/SelectProducts";
+            url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/SelectProducts/" + CheckId;
             return View(url);
         }
 
-        public IActionResult SelectProducts()
+        public IActionResult SelectProducts(int CheckId)
         {
-            return View(new ProductViewModel(context.Product.ToList()));
+            var Check = context.Checks.Find(CheckId);
+            if (Check is null)
+                return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
+            Check.Products = context.Product.Where(product => product.CheckId == CheckId).ToList();
+            return View(Check);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult ConfirmSelectedProducts(ProductsAndUserViewModel model)
-        //{
-        //    context.Checks.Find(1).Names += model.UserName;
-        //    foreach (var i in model.Products)
-        //    {
-        //        if (i.IsChecked == true)
-        //            context.Check_Product.Add(new Check_Product(i.Id, curCheckId, model.UserName));
-        //    }
-        //    context.SaveChanges();
-        //    return View("SelectProducts", new ProductViewModel(context.Product.ToList()));
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ConfirmSelectedProducts(Check model, string userName)
+        {
+            var user = new Models.User(userName);
+            context.Users.Add(user);
+            context.SaveChanges();
+            context.checkUsers.Add(new CheckUser(model.CheckId, user.UserId));
+            foreach(var i in model.Products)
+                if (i.IsChecked == true)
+                    context.productUsers.Add(new ProductUser(user.UserId, i.ProductId));
+            context.SaveChanges();
+            return View("Index");
+        }
     }
 }

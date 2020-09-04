@@ -7,7 +7,10 @@
 
 <div class="form-group">
     <label>Link</label>
-    <a asp-action="SelectProducts">@Model.Address</a>
+    <a asp-action="SelectProducts" asp-route-CheckId="@Model.Address[Model.Address.Length-1]">@Model.Address</a>
 </div>
 
-<a asp-action="Index">Back to list</a>
+<form asp-action="CheckProducts">
+    <input type="submit" value="Back to list"/>
+    <input type="hidden" name="id" value="@Model.Address[Model.Address.Length-1]">
+</form>

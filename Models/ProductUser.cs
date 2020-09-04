@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 
 namespace CheckSeparatorMVC.Models
 {
-    public class CheckUser
+    public class ProductUser
     {
-        public int CheckId { get; set; }
-        public Check Check { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
-        public CheckUser(int checkId, int userId)
+        public ProductUser(int userId, int productId)
         {
-            CheckId = checkId;
             UserId = userId;
+            ProductId = productId;
         }
     }
 }

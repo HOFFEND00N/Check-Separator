@@ -54,8 +54,15 @@
     </tbody>
 </table>
 
-<a asp-action="CalculateCheck">Calculate Check</a>
-<a asp-action="MakeUrl">Make URL for other people</a>
+<form asp-action="CalculateCheck">
+    <input type="submit" value="Calculate Check"/>
+    <input type="hidden" name="CheckId" value="@Model.CheckId">
+</form>
+<form asp-action="MakeUrl">
+    <input type="submit" value="Make URL for other people" class="btn btn-primary"/>
+    <input type="hidden" name="CheckId" value="@Model.CheckId"/>
+</form>
+<a asp-action="MakeUrl"></a>
 
 
 

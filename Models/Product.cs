@@ -27,6 +27,10 @@ namespace CheckSeparatorMVC.Models
         public int CheckId { get; set; }
 
         public Check Check { get; set; }
+
+        public bool IsChecked { get; set; }
+
+        public List<ProductUser> ProductUsers { get; set; }
         public Product()
         {
             ProductId = 0;
@@ -38,7 +42,7 @@ namespace CheckSeparatorMVC.Models
         {
             CheckId = checkId;
         }
-        public Product(int id, string name, double price, int amount, bool isChecked)
+        public Product(int id, string name, double price, int amount)
         {
             ProductId = id;
             Price = price;

@@ -11,5 +11,12 @@ namespace CheckSeparatorMVC.Models
         public string Name { get; set; }
 
         public List<CheckUser> CheckUsers { get; set; }
+
+        public List<ProductUser> ProductUsers { get; set; }
+
+        public User(string name)
+        {
+            Name = name;
+        }
     }
 }

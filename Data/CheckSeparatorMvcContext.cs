@@ -19,12 +19,17 @@ namespace CheckSeparatorMVC.Data
             modelBuilder.Entity<CheckUser>().HasOne(cu => cu.Check).WithMany(c => c.CheckUsers).HasForeignKey(c => c.CheckId);
             modelBuilder.Entity<CheckUser>().HasOne(cu => cu.User).WithMany(c => c.CheckUsers).HasForeignKey(c => c.UserId);
 
-            modelBuilder.Entity<CheckUser>().HasKey(cu => new { cu.CheckId, cu.UserId });
+            modelBuilder.Entity<ProductUser>().HasOne(pu => pu.Product).WithMany(p => p.ProductUsers).HasForeignKey(pu => pu.ProductId);
+            modelBuilder.Entity<ProductUser>().HasOne(pu => pu.User).WithMany(p => p.ProductUsers).HasForeignKey(pu => pu.UserId);
 
+            modelBuilder.Entity<CheckUser>().HasKey(cu => new { cu.CheckId, cu.UserId });
+            modelBuilder.Entity<ProductUser>().HasKey(pu => new { pu.ProductId, pu.UserId });
         }
 
         public DbSet<Product> Product { get; set; }
         public DbSet<Check> Checks { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<CheckUser> checkUsers { get; set; }
+        public DbSet<ProductUser> productUsers { get; set; }
     }
 }
