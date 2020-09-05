@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVC.csproj": {}
+    "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVC.csproj": {
+    "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVC.csproj",
+        "projectUniqueName": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVC.csproj",
         "projectName": "CheckSeparatorMVC",
-        "projectPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVC.csproj",
+        "projectPath": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVC.csproj",
         "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\obj\\",
+        "outputPath": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -25,8 +25,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://www.nuget.org/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
