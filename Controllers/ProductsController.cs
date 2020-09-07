@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Data;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace CheckSeparatorMVC.Controllers
 {
+    //TODO: Honest usr authentification, Oauth 2 - protocol
+    //TODO: registred user change selected products
     public class ProductsController : Controller
     {
         private readonly CheckSeparatorMvcContext context;
@@ -23,10 +26,9 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult CheckProducts(int CheckId)
         {
-            var Check = context.Checks.Find(CheckId);
+            var Check = context.Checks.Include(c => c.Products).FirstOrDefault(c => c.CheckId == CheckId);
             if (Check is null)
                 return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
-            Check.Products = context.Product.Where(product => product.CheckId == CheckId).ToList();
             return View(Check);
         }
 
@@ -62,7 +64,6 @@ namespace CheckSeparatorMVC.Controllers
         public IActionResult AddProduct(Product product)
         {
             context.Product.Add(product);
-            context.Checks.Find(product.CheckId).Products.Add(product);
             context.SaveChanges();
             return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
@@ -97,42 +98,10 @@ namespace CheckSeparatorMVC.Controllers
             context.SaveChanges();
             return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
-
-        public IActionResult CalculateCheck(int CheckId)
-        {
-            var check = context.Checks.Find(CheckId);
-            var products = context.Product.Where(p => p.CheckId == CheckId);
-            var users = context.checkUsers.Where(cu => cu.CheckId == CheckId);
-            Dictionary<int, int> productCnt = new Dictionary<int, int>();
-
-            foreach(var i in users)
-            {
-                var selectedProducts = context.productUsers.Where(pu => pu.UserId == i.UserId)
-            }
-
-            foreach (var item in context.Check_Product.ToList())
-            {
-                if (productCnt.ContainsKey(item.ProductId))
-                    productCnt[item.ProductId]++;
-                else
-                    productCnt.Add(item.ProductId, 1);
-            }
-
-            List<Transactions> transactions = new List<Transactions>();
-            foreach (var item in context.Check_Product.ToList())
-            {
-                if (productCnt.ContainsKey(item.ProductId))
-                {
-                    var product = context.Product.Find(item.ProductId);
-                    var tmp = (product.Price * product.Amount) / productCnt[item.ProductId];
-                    transactions.Add(new Transactions(item.UserName, "admin", tmp));
-                }
-            }
-            return View("Transactions", transactions);
-        }
-
+        
         public IActionResult MakeUrl(int CheckId)
         {
+            // url wrong, made view
             var url = new Url();
             url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/SelectProducts/" + CheckId;
             return View(url);
@@ -151,15 +120,42 @@ namespace CheckSeparatorMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ConfirmSelectedProducts(Check model, string userName)
         {
+            //SRP
             var user = new Models.User(userName);
             context.Users.Add(user);
             context.SaveChanges();
+
             context.checkUsers.Add(new CheckUser(model.CheckId, user.UserId));
             foreach(var i in model.Products)
                 if (i.IsChecked == true)
                     context.productUsers.Add(new ProductUser(user.UserId, i.ProductId));
             context.SaveChanges();
             return View("Index");
+        }
+
+        public IActionResult CalculateCheck(int CheckId)
+        {
+            //maybe start with Check
+            var products = context.Product
+                .Where(p => p.CheckId == CheckId)
+                    .Include(p => p.ProductUsers)
+                        .ThenInclude(pu => pu.User)
+                    .Include(p => p.Check);
+
+            //should move code above to separate class
+            List<Transactions> transactions = new List<Transactions>();
+            foreach (var item in products.ToList())
+            {
+                var cntUsersToSplit = item.ProductUsers.Count;
+                if (cntUsersToSplit != 0)
+                {
+                    var transactionSize = (item.Price * item.Amount) / item.ProductUsers.Count;
+                    foreach (var j in item.ProductUsers)
+                        transactions.Add(new Transactions(j.User.Name, item.Check.OwnerName, 
+                            transactionSize));
+                }
+            }
+            return View("Transactions", transactions);
         }
     }
 }
