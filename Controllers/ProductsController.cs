@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CheckSeparatorMVC.Controllers
 {
+    //TODO: Honest usr authentification, Oauth 2 - protocol
+    //TODO: registred user change selected products
     public class ProductsController : Controller
     {
         private readonly CheckSeparatorMvcContext context;
@@ -24,10 +26,9 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult CheckProducts(int CheckId)
         {
-            var Check = context.Checks.Find(CheckId);
+            var Check = context.Checks.Include(c => c.Products).FirstOrDefault(c => c.CheckId == CheckId);
             if (Check is null)
                 return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
-            Check.Products = context.Product.Where(product => product.CheckId == CheckId).ToList();
             return View(Check);
         }
 
@@ -63,7 +64,6 @@ namespace CheckSeparatorMVC.Controllers
         public IActionResult AddProduct(Product product)
         {
             context.Product.Add(product);
-            context.Checks.Find(product.CheckId).Products.Add(product);
             context.SaveChanges();
             return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
         }
@@ -101,6 +101,7 @@ namespace CheckSeparatorMVC.Controllers
         
         public IActionResult MakeUrl(int CheckId)
         {
+            // url wrong, made view
             var url = new Url();
             url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/SelectProducts/" + CheckId;
             return View(url);
@@ -119,9 +120,11 @@ namespace CheckSeparatorMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ConfirmSelectedProducts(Check model, string userName)
         {
+            //SRP
             var user = new Models.User(userName);
             context.Users.Add(user);
             context.SaveChanges();
+
             context.checkUsers.Add(new CheckUser(model.CheckId, user.UserId));
             foreach(var i in model.Products)
                 if (i.IsChecked == true)
@@ -132,12 +135,14 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult CalculateCheck(int CheckId)
         {
+            //maybe start with Check
             var products = context.Product
                 .Where(p => p.CheckId == CheckId)
                     .Include(p => p.ProductUsers)
                         .ThenInclude(pu => pu.User)
                     .Include(p => p.Check);
 
+            //should move code above to separate class
             List<Transactions> transactions = new List<Transactions>();
             foreach (var item in products.ToList())
             {
@@ -152,6 +157,5 @@ namespace CheckSeparatorMVC.Controllers
             }
             return View("Transactions", transactions);
         }
-
     }
 }
