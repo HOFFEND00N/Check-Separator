@@ -9,6 +9,8 @@ namespace CheckSeparatorMVC.Models
     {
         public int UserId { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 
         public List<CheckUser> CheckUsers { get; set; }
 
@@ -17,6 +19,12 @@ namespace CheckSeparatorMVC.Models
         public User(string name)
         {
             Name = name;
+        }
+
+        public User(string Email, string Password)
+        {
+            this.Email = Email;
+            this.Password = Password;
         }
     }
 }

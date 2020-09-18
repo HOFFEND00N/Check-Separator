@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using System.Data;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CheckSeparatorMVC.Controllers
 {
     //TODO: Honest usr authentification, Oauth 2 - protocol
     //TODO: registred user change selected products
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly CheckSeparatorMvcContext context;
@@ -109,10 +111,9 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult SelectProducts(int CheckId)
         {
-            var Check = context.Checks.Find(CheckId);
+            var Check = context.Checks.Include(c => c.Products).FirstOrDefault(c => c.CheckId == CheckId);
             if (Check is null)
                 return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
-            Check.Products = context.Product.Where(product => product.CheckId == CheckId).ToList();
             return View(Check);
         }
 
@@ -135,7 +136,6 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult CalculateCheck(int CheckId)
         {
-            //maybe start with Check
             var products = context.Product
                 .Where(p => p.CheckId == CheckId)
                     .Include(p => p.ProductUsers)

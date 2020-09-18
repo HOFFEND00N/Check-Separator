@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CheckSeparatorMVC</title>
-    @*<link rel="stylesheet" href="~/css/Reset.css"/>*@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -12,6 +11,9 @@
     <header class="header">
         <a class="menu-item" asp-action="Index" asp-controller="Home">Home</a>
         <a class="menu-item" asp-action="Index" asp-controller="Products">Product Menu</a>
+        <a class="menu-item" asp-action="Login" asp-controller="Account">Login</a>
+        <a class="menu-item" asp-action="Register" asp-controller="Account">Register</a>
+        <a class="menu-item" asp-action="LogOut" asp-controller="Account">Log out</a>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
