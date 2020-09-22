@@ -7,6 +7,7 @@ using System.Data;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace CheckSeparatorMVC.Controllers
 {
@@ -23,6 +24,7 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult Index()
         {
+            var id = User.Claims.FirstOrDefault(x => x.Type == "Id");
             return View();
         }
 

@@ -195,3 +195,7 @@ C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparato
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
+C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\GitHub\CheckSeparatorMVC\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\CheckMenu.cshtml.g.cs

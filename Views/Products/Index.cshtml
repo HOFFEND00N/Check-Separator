@@ -1,13 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Product Menu";
+﻿@model IEnumerable<CheckSeparatorMVC.Models.Check>
+@{
+    ViewData["Title"] = "Checks";
 }
 
-<h1> Product Menu </h1>
+<h1> Check menu </h1>
 
 <a asp-action="CreateCheck" class="btn btn-primary"> Create new check </a>
 <form asp-action="FindCheck">
-    <label> Find existing check </label>
+    <label> Find existing check using Check Id</label>
     <input type="text" name="CheckId"/>
     <input type="submit" value="Find" class="btn btn-primary"/>
 </form>
+
 

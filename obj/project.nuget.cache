@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gasMGBECdNabbPtlfc7tPpUBk3grqlVEkv5uOmARBPLU55R6/m+hqhmGeaXa3mbhWQpj3mNMxcIHeckLpD6ZvQ==",
+  "dgSpecHash": "rlQ9X3sFsapd2DrEJIf+QpRZRJXmn1RIG/xWhEKObVY9eOyejsMuhu8LwaecW5ADPbzCjvx+QhRlGhNyYAqAhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVC.csproj",
+  "projectFilePath": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ivan\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Ivan\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

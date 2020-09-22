@@ -9,8 +9,6 @@ namespace CheckSeparatorMVC.Models
         public List<Product> Products { get; set; }
         public Check()
         {
-            //CheckId = 0;
-            //OwnerName = "admin";
         }
 
         public Check(string name)
