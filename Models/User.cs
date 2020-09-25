@@ -21,10 +21,11 @@ namespace CheckSeparatorMVC.Models
             Name = name;
         }
 
-        public User(string Email, string Password)
+        public User(string Email, string Password, string Name)
         {
             this.Email = Email;
             this.Password = Password;
+            this.Name = Name;
         }
     }
 }

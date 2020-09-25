@@ -15,5 +15,8 @@ namespace CheckSeparatorMVC.ViewModels
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password is incorrect")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "User name is not specified")]
+        public string UserName { get; set; }
     }
 }

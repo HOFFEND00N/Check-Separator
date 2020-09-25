@@ -62,6 +62,7 @@ namespace CheckSeparatorMVC.Controllers
                 User user = await context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user == null)
                 {
+                    user = new User(model.Email, model.Password, model.UserName);
                     context.Users.Add(user);
                     await context.SaveChangesAsync();
 
@@ -81,7 +82,7 @@ namespace CheckSeparatorMVC.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim("Id", user.UserId.ToString())
+                new Claim("UserId", user.UserId.ToString())
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", 

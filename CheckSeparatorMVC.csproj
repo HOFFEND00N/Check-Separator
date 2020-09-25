@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200922083551_transferMigration.cs" />
+    <Compile Remove="Migrations\20200922083551_transferMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200923134102_newColumnInRegisterModel.cs" />
+    <Compile Remove="Migrations\20200923134102_newColumnInRegisterModel.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.6" />

@@ -40,7 +40,6 @@ namespace CheckSeparatorMVC
 
             services.AddDbContext<CheckSeparatorMvcContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("CheckSeparatorMvcContext")));
-
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -52,7 +51,6 @@ namespace CheckSeparatorMVC
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

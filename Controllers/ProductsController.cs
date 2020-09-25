@@ -11,12 +11,14 @@ using System.Security.Claims;
 
 namespace CheckSeparatorMVC.Controllers
 {
-    //TODO: Honest usr authentification, Oauth 2 - protocol
-    //TODO: registred user change selected products
+    // DIno Esposito Read about cookie/authoriization
+    // Why local varaible in controller is wrong(what ig going inside?!)
+    // User.Claims ... where from
     [Authorize]
     public class ProductsController : Controller
     {
         private readonly CheckSeparatorMvcContext context;
+
         public ProductsController(CheckSeparatorMvcContext context)
         {
             this.context = context;
@@ -24,15 +26,31 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult Index()
         {
-            var id = User.Claims.FirstOrDefault(x => x.Type == "Id");
-            return View();
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "UserId");
+
+            var checkIds = context.checkUsers
+                .Where(cu => cu.UserId.ToString() == userId.Value)
+                    .Select(c => c.CheckId)
+                        .ToList();
+
+            var checks = context.Checks.Where(c => checkIds.Contains(c.CheckId));
+            return View(checks);
         }
 
         public IActionResult CheckProducts(int CheckId)
         {
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "UserId");
+
             var Check = context.Checks.Include(c => c.Products).FirstOrDefault(c => c.CheckId == CheckId);
+
             if (Check is null)
                 return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
+
+            foreach(var i in context.productUsers)
+            {
+                if (Check.Products.Contains(i.Product) && i.UserId.ToString() == userId.Value)
+                    Check.Products.FirstOrDefault(p => p.ProductId == i.ProductId).IsChecked = true;
+            }
             return View(Check);
         }
 
@@ -43,17 +61,13 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult CreateCheck()
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateCheck(string name)
-        {
-            var tmp = new Check(name);
-            context.Checks.Add(tmp);
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "UserId");
+            var user = context.Users.FirstOrDefault(u => u.UserId.ToString() == userId.Value);
+            var check = new Check(user);
+            context.Checks.Add(check);
+            context.checkUsers.Add(new CheckUser(check.CheckId, user.UserId));
             context.SaveChanges();
-            return RedirectToAction(nameof(CheckProducts), new { CheckId = tmp.CheckId });
+            return RedirectToAction(nameof(CheckProducts), new { check.CheckId });
         }
 
         [HttpPost]
@@ -69,7 +83,7 @@ namespace CheckSeparatorMVC.Controllers
         {
             context.Product.Add(product);
             context.SaveChanges();
-            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
+            return RedirectToAction(nameof(CheckProducts), new { product.CheckId });
         }
 
         public IActionResult DeleteProduct(int id)
@@ -85,7 +99,7 @@ namespace CheckSeparatorMVC.Controllers
             var product = context.Product.Find(id);
             context.Product.Remove(product);
             context.SaveChanges();
-            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
+            return RedirectToAction(nameof(CheckProducts), new { product.CheckId });
         }
 
         public IActionResult EditProduct(int id)
@@ -100,7 +114,7 @@ namespace CheckSeparatorMVC.Controllers
         {
             context.Product.Update(product);
             context.SaveChanges();
-            return RedirectToAction(nameof(CheckProducts), new { CheckId = product.CheckId });
+            return RedirectToAction(nameof(CheckProducts), new { product.CheckId });
         }
         
         public IActionResult MakeUrl(int CheckId)
@@ -158,6 +172,15 @@ namespace CheckSeparatorMVC.Controllers
                 }
             }
             return View("Transactions", transactions);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SaveChangesInCheck(Check model)
+        {
+            context.Checks.Update(model);
+            context.SaveChanges();
+            return RedirectToAction(nameof(CheckProducts), new { model.CheckId });
         }
     }
 }

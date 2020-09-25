@@ -5,62 +5,87 @@
 }
 
 <form asp-action="ViewAddProduct">
-    <input type="submit" class="btn btn-primary" value="Add Product"/>
+    <input type="submit" class="btn btn-primary" value="Add Product" />
     <input type="hidden" name="CheckId" value="@Model.CheckId" />
 </form>
 
-<table>
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                Amount
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.Products is null || Model.Products.Count() == 0)
-        {
-            <p class="ModelEmpty">
-                There is no products!
-            </p>
-        }
-        else
-        {
-            @foreach (var item in Model.Products)
+<form asp-controller="Products" asp-action="SaveChangesInCheck">
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Is selected
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Products is null || Model.Products.Count() == 0)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Amount)
-                    </td>
-                    <td>
-                        <a asp-action="DeleteProduct" asp-route-id="@item.ProductId"> Delete </a> |
-                        <a asp-action="EditProduct" asp-route-id="@item.ProductId"> Edit </a>
-                    </td>
-                </tr>
+                <p>
+                    There is no products!
+                </p>
             }
-        }
-    </tbody>
-</table>
+            else
+            {
+                @for (int i = 0; i < Model.Products.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Products[i].Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Products[i].Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Products[i].Amount)
+                        </td>
+                        <td>
+                            @if (Model.Products[i].IsChecked == false)
+                            {
+                                <input type="checkbox" name="model.Products[@i].IsChecked" value="true" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="model.Products[@i].IsChecked" value="true" checked />
+                            }
+                            <input type="hidden" name="model.Products[@i].Name" value="@Model.Products[i].Name" />
+                            <input type="hidden" name="model.Products[@i].Price" value="@Model.Products[i].Price" />
+                            <input type="hidden" name="model.Products[@i].Amount" value="@Model.Products[i].Amount" />
+                            <input type="hidden" name="model.Products[@i].ProductId" value="@Model.Products[i].ProductId" />
+                            <input type="hidden" name="model.Products[@i].CheckId" value="@Model.Products[i].CheckId" />
+                        </td>
+                        <td>
+                            <a asp-action="DeleteProduct" asp-route-id="@Model.Products[i].ProductId"> Delete </a> |
+                            <a asp-action="EditProduct" asp-route-id="@Model.Products[i].ProductId"> Edit </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <input type="hidden" name="model.OwnerName" value="@Model.OwnerName" />
+    <input type="hidden" name="model.CheckId" value="@Model.CheckId" />
+    <input type="hidden" name="model.OwnerId" value="@Model.OwnerId" />
+    <input type="submit" value="Save changes" class="btn btn-primary" />
+</form>
 
 <form asp-action="CalculateCheck">
-    <input type="submit" value="Calculate Check" class="btn btn-primary"/>
+    <input type="submit" value="Calculate Check" class="btn btn-primary" />
     <input type="hidden" name="CheckId" value="@Model.CheckId">
 </form>
 <form asp-action="MakeUrl">
-    <input type="submit" value="Make URL for other people" class="btn btn-primary"/>
-    <input type="hidden" name="CheckId" value="@Model.CheckId"/>
+    <input type="submit" value="Make URL for other people" class="btn btn-primary" />
+    <input type="hidden" name="CheckId" value="@Model.CheckId" />
 </form>
 <a asp-action="MakeUrl"></a>
 

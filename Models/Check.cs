@@ -5,15 +5,17 @@ namespace CheckSeparatorMVC.Models
     {
         public int CheckId { get; set; }
         public string OwnerName { get; set; }
+        public int OwnerId { get; set; }
         public List<CheckUser> CheckUsers { get; set; }
         public List<Product> Products { get; set; }
         public Check()
         {
         }
 
-        public Check(string name)
+        public Check(User user)
         {
-            OwnerName = name;
+            OwnerId = user.UserId;
+            OwnerName = user.Name;
         }
     }
 }
