@@ -1,0 +1,13 @@
+﻿@model CheckSeparatorMVC.Models.Check
+@{
+    ViewData["Title"] = "Add user";
+}
+
+
+<h1>Enter user Id</h1>
+<form asp-action="AddUserToCheck">
+    <input type="text" name="userId"/>
+    <label for="User ID"></label>
+    <input type="submit" value="Add"/>
+    <input type ="hidden" name="checkId" value="@Model.CheckId"/>
+</form>

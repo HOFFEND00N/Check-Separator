@@ -3,7 +3,6 @@ using CheckSeparatorMVC.Models;
 using CheckSeparatorMVC.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -25,9 +24,9 @@ namespace CheckSeparatorMVC.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
-            return View();
+            return View(new LoginModel(ReturnUrl));
         }
 
         [HttpPost]
@@ -39,9 +38,11 @@ namespace CheckSeparatorMVC.Controllers
                 User user = await context.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
                 if (user != null)
                 {
-                    await Authenticate(user); 
-
-                    return RedirectToAction("Index", "Home");
+                    await Authenticate(user);
+                    if (model.ReturnUrl != null)
+                        return Redirect(model.ReturnUrl);
+                    else
+                        return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Incorrect Login and(or) password");
             }

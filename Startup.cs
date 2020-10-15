@@ -39,7 +39,7 @@ namespace CheckSeparatorMVC
             services.AddControllersWithViews();
 
             services.AddDbContext<CheckSeparatorMvcContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("CheckSeparatorMvcContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("CheckSeparatorMvcContext")));
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;

@@ -1,4 +1,4 @@
-﻿@model CheckSeparatorMVC.Models.Check
+﻿@model CheckSeparatorMVC.ViewModels.CheckAndUserModel
 
 @{
     ViewData["Title"] = "Product list";
@@ -6,7 +6,7 @@
 
 <form asp-action="ViewAddProduct">
     <input type="submit" class="btn btn-primary" value="Add Product" />
-    <input type="hidden" name="CheckId" value="@Model.CheckId" />
+    <input type="hidden" name="CheckId" value="@Model.Check.CheckId" />
 </form>
 
 <form asp-controller="Products" asp-action="SaveChangesInCheck">
@@ -29,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model.Products is null || Model.Products.Count() == 0)
+            @if (Model.Check.Products is null || Model.Check.Products.Count() == 0)
             {
                 <p>
                     There is no products!
@@ -37,20 +37,20 @@
             }
             else
             {
-                @for (int i = 0; i < Model.Products.Count(); i++)
+                @for (int i = 0; i < Model.Check.Products.Count(); i++)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => Model.Products[i].Name)
+                            @Html.DisplayFor(modelItem => Model.Check.Products[i].Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => Model.Products[i].Price)
+                            @Html.DisplayFor(modelItem => Model.Check.Products[i].Price)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => Model.Products[i].Amount)
+                            @Html.DisplayFor(modelItem => Model.Check.Products[i].Amount)
                         </td>
                         <td>
-                            @if (Model.Products[i].IsChecked == false)
+                            @if (Model.Check.Products[i].IsChecked == false)
                             {
                                 <input type="checkbox" name="model.Products[@i].IsChecked" value="true" />
                             }
@@ -58,36 +58,37 @@
                             {
                                 <input type="checkbox" name="model.Products[@i].IsChecked" value="true" checked />
                             }
-                            <input type="hidden" name="model.Products[@i].Name" value="@Model.Products[i].Name" />
-                            <input type="hidden" name="model.Products[@i].Price" value="@Model.Products[i].Price" />
-                            <input type="hidden" name="model.Products[@i].Amount" value="@Model.Products[i].Amount" />
-                            <input type="hidden" name="model.Products[@i].ProductId" value="@Model.Products[i].ProductId" />
-                            <input type="hidden" name="model.Products[@i].CheckId" value="@Model.Products[i].CheckId" />
+                            <input type="hidden" name="model.Products[@i].Name" value="@Model.Check.Products[i].Name" />
+                            <input type="hidden" name="model.Products[@i].Price" value="@Model.Check.Products[i].Price" />
+                            <input type="hidden" name="model.Products[@i].Amount" value="@Model.Check.Products[i].Amount" />
+                            <input type="hidden" name="model.Products[@i].ProductId" value="@Model.Check.Products[i].ProductId" />
+                            <input type="hidden" name="model.Products[@i].CheckId" value="@Model.Check.Products[i].CheckId" />
                         </td>
                         <td>
-                            <a asp-action="DeleteProduct" asp-route-id="@Model.Products[i].ProductId"> Delete </a> |
-                            <a asp-action="EditProduct" asp-route-id="@Model.Products[i].ProductId"> Edit </a>
+                            <a asp-action="DeleteProduct" asp-route-id="@Model.Check.Products[i].ProductId"> Delete </a> |
+                            <a asp-action="EditProduct" asp-route-id="@Model.Check.Products[i].ProductId"> Edit </a>
                         </td>
                     </tr>
                 }
             }
         </tbody>
     </table>
-    <input type="hidden" name="model.OwnerName" value="@Model.OwnerName" />
-    <input type="hidden" name="model.CheckId" value="@Model.CheckId" />
-    <input type="hidden" name="model.OwnerId" value="@Model.OwnerId" />
+    <input type="hidden" name="model.OwnerName" value="@Model.Check.OwnerName" />
+    <input type="hidden" name="model.CheckId" value="@Model.Check.CheckId" />
+    <input type="hidden" name="model.OwnerId" value="@Model.Check.OwnerId" />
     <input type="submit" value="Save changes" class="btn btn-primary" />
 </form>
-
-<form asp-action="CalculateCheck">
-    <input type="submit" value="Calculate Check" class="btn btn-primary" />
-    <input type="hidden" name="CheckId" value="@Model.CheckId">
-</form>
-<form asp-action="MakeUrl">
-    <input type="submit" value="Make URL for other people" class="btn btn-primary" />
-    <input type="hidden" name="CheckId" value="@Model.CheckId" />
-</form>
-<a asp-action="MakeUrl"></a>
+@if (Model.Check.OwnerId == Model.User.UserId)
+{
+    <form asp-action="CalculateCheck">
+        <input type="submit" value="Calculate Check" class="btn btn-primary" />
+        <input type="hidden" name="CheckId" value="@Model.Check.CheckId">
+    </form>
+    <form asp-action="ViewAddUserToCheck">
+        <input type="submit" value="Add user to check" class="btn btn-primary"/>
+        <input type="hidden" name="CheckId" value="@Model.Check.CheckId"/>
+    </form>
+}
 
 
 

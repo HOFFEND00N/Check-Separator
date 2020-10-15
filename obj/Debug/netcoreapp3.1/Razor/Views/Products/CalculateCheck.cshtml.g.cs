@@ -28,7 +28,7 @@ using CheckSeparatorMVC.Models;
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0439e0a40882cd01cc55710b755f897066ce7a14", @"/Views/Products/CalculateCheck.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"049e696212ad5ee7eb78debbbf094036487c45f6", @"/Views/_ViewImports.cshtml")]
-    public class Views_Products_CalculateCheck : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<CheckSeparatorMVC.Models.Transactions>
+    public class Views_Products_CalculateCheck : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<CheckSeparatorMVC.Models.Transaction>
     {
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
@@ -53,7 +53,7 @@ using CheckSeparatorMVC.Models;
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<CheckSeparatorMVC.Models.Transactions> Html { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<CheckSeparatorMVC.Models.Transaction> Html { get; private set; }
     }
 }
 #pragma warning restore 1591

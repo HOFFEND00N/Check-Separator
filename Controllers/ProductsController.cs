@@ -2,18 +2,15 @@
 using CheckSeparatorMVC.Data;
 using CheckSeparatorMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using System.Data;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+using CheckSeparatorMVC.ViewModels;
+using System;
 
 namespace CheckSeparatorMVC.Controllers
 {
-    // DIno Esposito Read about cookie/authoriization
-    // Why local varaible in controller is wrong(what ig going inside?!)
-    // User.Claims ... where from
     [Authorize]
     public class ProductsController : Controller
     {
@@ -46,12 +43,30 @@ namespace CheckSeparatorMVC.Controllers
             if (Check is null)
                 return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
 
-            foreach(var i in context.productUsers)
+            var user = context.Users.FirstOrDefault(u => u.UserId.ToString() == userId.Value);
+            if (!UserInCheck(Check, user))
+                AddUserToCheck(Check, user);
+
+            foreach (var i in context.productUsers)
             {
                 if (Check.Products.Contains(i.Product) && i.UserId.ToString() == userId.Value)
                     Check.Products.FirstOrDefault(p => p.ProductId == i.ProductId).IsChecked = true;
             }
-            return View(Check);
+
+            return View(new CheckAndUserModel(Check, context.Users.FirstOrDefault(u => u.UserId.ToString() == userId.Value)));
+        }
+
+        private bool UserInCheck(Check check, User user)
+        {
+            if (context.checkUsers.FirstOrDefault(cu => cu.CheckId == check.CheckId && cu.UserId == user.UserId) is null)
+                return false;
+            return true;
+        }
+
+        private void AddUserToCheck(Check check, User user)
+        {
+            context.checkUsers.Add(new CheckUser(check.CheckId, user.UserId));
+            context.SaveChanges();
         }
 
         public IActionResult FindCheck(int checkId)
@@ -65,6 +80,7 @@ namespace CheckSeparatorMVC.Controllers
             var user = context.Users.FirstOrDefault(u => u.UserId.ToString() == userId.Value);
             var check = new Check(user);
             context.Checks.Add(check);
+            context.SaveChanges();
             context.checkUsers.Add(new CheckUser(check.CheckId, user.UserId));
             context.SaveChanges();
             return RedirectToAction(nameof(CheckProducts), new { check.CheckId });
@@ -116,40 +132,25 @@ namespace CheckSeparatorMVC.Controllers
             context.SaveChanges();
             return RedirectToAction(nameof(CheckProducts), new { product.CheckId });
         }
-        
-        public IActionResult MakeUrl(int CheckId)
-        {
-            // url wrong, made view
-            var url = new Url();
-            url.Address = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host.Value + "/Products/SelectProducts/" + CheckId;
-            return View(url);
-        }
 
-        public IActionResult SelectProducts(int CheckId)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ViewAddUserToCheck(int checkId)
         {
-            var Check = context.Checks.Include(c => c.Products).FirstOrDefault(c => c.CheckId == CheckId);
-            if (Check is null)
-                return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
-            return View(Check);
+            return View("AddUserToCheck", context.Checks.FirstOrDefault(c => c.CheckId == checkId));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ConfirmSelectedProducts(Check model, string userName)
+        public IActionResult AddUserToCheck(int userId, int checkId)
         {
-            //SRP
-            var user = new Models.User(userName);
-            context.Users.Add(user);
+            if (context.Users.FirstOrDefault(u => u.UserId == userId) == null)
+                return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
+            context.checkUsers.Add(new CheckUser(checkId, userId));
             context.SaveChanges();
-
-            context.checkUsers.Add(new CheckUser(model.CheckId, user.UserId));
-            foreach(var i in model.Products)
-                if (i.IsChecked == true)
-                    context.productUsers.Add(new ProductUser(user.UserId, i.ProductId));
-            context.SaveChanges();
-            return View("Index");
+            return RedirectToAction(nameof(CheckProducts), new { checkId });
         }
-
+        
         public IActionResult CalculateCheck(int CheckId)
         {
             var products = context.Product
@@ -158,19 +159,8 @@ namespace CheckSeparatorMVC.Controllers
                         .ThenInclude(pu => pu.User)
                     .Include(p => p.Check);
 
-            //should move code above to separate class
-            List<Transactions> transactions = new List<Transactions>();
-            foreach (var item in products.ToList())
-            {
-                var cntUsersToSplit = item.ProductUsers.Count;
-                if (cntUsersToSplit != 0)
-                {
-                    var transactionSize = (item.Price * item.Amount) / item.ProductUsers.Count;
-                    foreach (var j in item.ProductUsers)
-                        transactions.Add(new Transactions(j.User.Name, item.Check.OwnerName, 
-                            transactionSize));
-                }
-            }
+            List<Transaction> transactions = Transaction.MakeTransactionList(products.ToList());
+
             return View("Transactions", transactions);
         }
 
@@ -178,7 +168,18 @@ namespace CheckSeparatorMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SaveChangesInCheck(Check model)
         {
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "UserId");
             context.Checks.Update(model);
+            foreach (var i in model.Products)
+            {
+                var productUser = new ProductUser(Convert.ToInt32(userId.Value), i.ProductId);
+                if (context.productUsers.FirstOrDefault(pu => pu.ProductId == productUser.ProductId && pu.UserId == productUser.UserId) == null
+                    && i.IsChecked == true)
+                    context.productUsers.Add(productUser);
+                if (context.productUsers.FirstOrDefault(pu => pu.ProductId == productUser.ProductId && pu.UserId == productUser.UserId) != null
+                    && i.IsChecked == false)
+                    context.productUsers.Remove(productUser);
+            }
             context.SaveChanges();
             return RedirectToAction(nameof(CheckProducts), new { model.CheckId });
         }
