@@ -6,10 +6,11 @@
 <h1>Login</h1>
 
 <form asp-action="Login" asp-antiforgery="true">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     <div class="form-group">
-        <label asp-for="@Model.Email">Email</label>
-        <input asp-for="@Model.Email" />
-        <span asp-validation-for="@Model.Email"></span>
+        <label asp-for="@Model.UserName">Username</label>
+        <input asp-for="@Model.UserName" />
+        <span asp-validation-for="@Model.UserName"></span>
     </div>
     <div class="form-group">
         <label asp-for="@Model.Password">Password</label>
@@ -19,5 +20,5 @@
     <div class="form-group">
         <input type="submit" value="Login" />
     </div>
-    <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl"/>
+    <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
 </form>

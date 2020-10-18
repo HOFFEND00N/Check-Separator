@@ -3,6 +3,7 @@ using CheckSeparatorMVC.Models;
 using CheckSeparatorMVC.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -14,9 +15,13 @@ namespace CheckSeparatorMVC.Controllers
     public class AccountController : Controller
     {
         private readonly CheckSeparatorMvcContext context;
-        public AccountController(CheckSeparatorMvcContext context)
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+        public AccountController(CheckSeparatorMvcContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             this.context = context;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -35,23 +40,23 @@ namespace CheckSeparatorMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await context.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
-                if (user != null)
-                {
-                    await Authenticate(user);
-                    if (model.ReturnUrl != null)
-                        return Redirect(model.ReturnUrl);
-                    else
-                        return RedirectToAction("Index", "Home");
-                }
-                ModelState.AddModelError("", "Incorrect Login and(or) password");
+                if (!string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
+                    model.ReturnUrl = "/Home/Index";
+
+                var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+
+                if (result.Succeeded)
+                    return Redirect(model.ReturnUrl);
+                else
+                    ModelState.AddModelError("", "Wrong Login or(and) password");
             }
+
             return View(model);
         }
 
-        public IActionResult Register()
+        public IActionResult Register(string ReturnUrl)
         {
-            return View();
+            return View(new RegisterModel(ReturnUrl));
         }
 
         [HttpPost]
@@ -60,42 +65,32 @@ namespace CheckSeparatorMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-                if (user == null)
+                if (!string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
+                    model.ReturnUrl = "/Home/Index";
+
+                var user = new User { Email = model.Email, UserName = model.UserName };
+                var result = await userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
                 {
-                    user = new User(model.Email, model.Password, model.UserName);
-                    context.Users.Add(user);
-                    await context.SaveChangesAsync();
-
-                    await Authenticate(user); 
-
-                    return RedirectToAction("Index", "Home");
+                    await signInManager.SignInAsync(user, false);
+                    return Redirect(model.ReturnUrl);
                 }
                 else
-                    ModelState.AddModelError("", "Incorrect Login and(or) password");
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+
             }
             return View(model);
         }
 
-        private async Task Authenticate(User user)
-        {
-            // создаем один claim
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim("UserId", user.UserId.ToString())
-            };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", 
-                ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, 
-                new ClaimsPrincipal(id));
-        }
-
         public async Task<IActionResult> LogOut()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
     }

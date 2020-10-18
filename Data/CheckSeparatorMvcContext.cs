@@ -1,18 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CheckSeparatorMVC.Models;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace CheckSeparatorMVC.Data
 {
-    public class CheckSeparatorMvcContext : DbContext
+    public class CheckSeparatorMvcContext : IdentityDbContext
     {
         public CheckSeparatorMvcContext(DbContextOptions<CheckSeparatorMvcContext> options) : base(options)
         {
-
+            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>().HasOne(p => p.Check).WithMany(c => c.Products).HasForeignKey(c => c.CheckId);
             modelBuilder.Entity<Check>().HasMany(p => p.Products).WithOne(c => c.Check);
 

@@ -41,7 +41,7 @@ namespace CheckSeparatorMVC.Models
                 {
                     var transactionSize = (item.Price * item.Amount) / item.ProductUsers.Count;
                     foreach (var j in item.ProductUsers)
-                        transactions.Add(new Transaction(j.User.Name, item.Check.OwnerName,
+                        transactions.Add(new Transaction(j.User.UserName, item.Check.OwnerName,
                             transactionSize));
                 }
             }

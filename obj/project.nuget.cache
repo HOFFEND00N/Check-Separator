@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Tw0t1IoSWD8er7yWXN7I0QMR7qOsihbX2mLVT+0dNkDCEz9MUPXqEtDuq2TjBvkHAPAqJwET0btAIBsKzyvPfA==",
+  "dgSpecHash": "wmICefHc12mASa/Gsvn3t1FCRSY5zShCjvnuxoFtWlVIdxYnSwOEbwLg60/1JajtdZcKrF10Nf8QONH+xA/xOQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ivan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.8\\microsoft.aspnetcore.cryptography.internal.3.1.8.nupkg.sha512",
     "C:\\Users\\Ivan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.8\\microsoft.aspnetcore.cryptography.keyderivation.3.1.8.nupkg.sha512",
+    "C:\\Users\\Ivan\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.6\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.6.nupkg.sha512",
     "C:\\Users\\Ivan\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.8\\microsoft.aspnetcore.identity.ui.3.1.8.nupkg.sha512",
     "C:\\Users\\Ivan\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Ivan\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

@@ -78,7 +78,7 @@
     <input type="hidden" name="model.OwnerId" value="@Model.Check.OwnerId" />
     <input type="submit" value="Save changes" class="btn btn-primary" />
 </form>
-@if (Model.Check.OwnerId == Model.User.UserId)
+@if (Model.Check.OwnerId == Model.User.Id)
 {
     <form asp-action="CalculateCheck">
         <input type="submit" value="Calculate Check" class="btn btn-primary" />

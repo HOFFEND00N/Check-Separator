@@ -206,8 +206,9 @@ C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\Microsoft.Ext
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\AddUserToCheck.cshtml.g.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csproj.CoreCompileInputs.cache
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Ivan\source\repos\Check-Separator\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\CheckSeparatorMVC.csprojAssemblyReference.cache
-C:\Users\Ivan\source\repos\Check-Separator\obj\Debug\netcoreapp3.1\Razor\Views\Products\AddUserToCheck.cshtml.g.cs

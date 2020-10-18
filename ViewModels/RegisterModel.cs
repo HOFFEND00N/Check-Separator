@@ -18,5 +18,16 @@ namespace CheckSeparatorMVC.ViewModels
 
         [Required(ErrorMessage = "User name is not specified")]
         public string UserName { get; set; }
+
+        public string ReturnUrl { get; set; }
+
+        public RegisterModel(string ReturnUrl)
+        {
+            this.ReturnUrl = ReturnUrl;
+        }
+
+        public RegisterModel()
+        {
+        }
     }
 }

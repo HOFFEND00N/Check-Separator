@@ -4,8 +4,8 @@ namespace CheckSeparatorMVC.ViewModels
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Email is not specified")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Username is not specified")]
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Password is not specified")]
         [DataType(DataType.Password)]

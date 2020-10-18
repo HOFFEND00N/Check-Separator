@@ -9,10 +9,10 @@ namespace CheckSeparatorMVC.Models
     {
         public int CheckId { get; set; }
         public Check Check { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
-        public CheckUser(int checkId, int userId)
+        public CheckUser(int checkId, string userId)
         {
             CheckId = checkId;
             UserId = userId;
