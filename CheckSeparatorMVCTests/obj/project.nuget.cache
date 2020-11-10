@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uZa6WcpFxl7wJyZEhVKt7DvXXJ3qw71RivUqx+UGzIBp7Cu2OmBKCHQ1fIDJp0/zmqRO9qheDKhAI9j1X59fhQ==",
+  "dgSpecHash": "GXhpmUX2Nns6bbkP5GmFZ8RygjqgZABBOuhdT51hCRQHP2wT1BbF6B77+wFkU/VgCVCDUZvuUL8LHgYOiQGCTQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ivan\\source\\repos\\CheckSeparator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj",
+  "projectFilePath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ivan\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\Ivan\\.nuget\\packages\\coverlet.collector\\1.3.0\\coverlet.collector.1.3.0.nupkg.sha512",

@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Check-Separator\CheckSeparatorMVC.csproj" />
+    <ProjectReference Include="..\CheckSeparator\CheckSeparatorMVC.csproj" />
   </ItemGroup>
 
 </Project>

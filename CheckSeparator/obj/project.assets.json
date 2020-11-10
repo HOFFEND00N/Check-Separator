@@ -5631,11 +5631,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ivan\\source\\repos\\CheckSeparator\\Check-Separator\\CheckSeparatorMVC.csproj",
+      "projectUniqueName": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
       "projectName": "CheckSeparatorMVC",
-      "projectPath": "C:\\Users\\Ivan\\source\\repos\\CheckSeparator\\Check-Separator\\CheckSeparatorMVC.csproj",
+      "projectPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
       "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ivan\\source\\repos\\CheckSeparator\\Check-Separator\\obj\\",
+      "outputPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
