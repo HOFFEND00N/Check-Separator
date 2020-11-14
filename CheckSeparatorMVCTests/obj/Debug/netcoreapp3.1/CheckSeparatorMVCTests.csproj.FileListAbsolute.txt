@@ -460,6 +460,5 @@ C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\bin\Debug\netc
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\netcoreapp3.1\CheckSeparatorMVCTests.csprojAssemblyReference.cache
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\netcoreapp3.1\CheckSeparatorMVCTests.AssemblyInfoInputs.cache
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\netcoreapp3.1\CheckSeparatorMVCTests.AssemblyInfo.cs
-C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\netcoreapp3.1\CheckSeparatorMVCTests.csproj.CoreCompileInputs.cache
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\netcoreapp3.1\CheckSeparatorMVCTests.csproj.CopyComplete
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\netcoreapp3.1\CheckSeparatorMVCTests.genruntimeconfig.cache
