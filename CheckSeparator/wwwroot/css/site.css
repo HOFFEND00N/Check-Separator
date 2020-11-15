@@ -1,0 +1,54 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.header{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.menu-item{
+    margin-left: 5px;
+    border: solid 1px black;
+    padding: 1px 3px;
+}
+
+a {
+    outline: none;
+    font-size: large;
+    text-decoration: none;
+}
+
+    a:visited {
+        color: blue;
+    }
+
+    a:active {
+        color: blue;
+    }
+
+.home-h1{
+    margin: 20px;
+}
+
+field-validation-error {
+    color: red;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: red;
+}
+
+.validation-summary-valid {
+    display: none;
+}

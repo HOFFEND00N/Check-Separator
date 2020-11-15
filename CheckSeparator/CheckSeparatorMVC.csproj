@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200922083551_transferMigration.cs" />
+    <Compile Remove="Migrations\20200922083551_transferMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200923134102_newColumnInRegisterModel.cs" />
+    <Compile Remove="Migrations\20200923134102_newColumnInRegisterModel.Designer.cs" />
+    <Compile Remove="Migrations\20201016181833_test.cs" />
+    <Compile Remove="Migrations\20201016181833_test.Designer.cs" />
+    <Compile Remove="Migrations\20201016182531_Initial.cs" />
+    <Compile Remove="Migrations\20201016182531_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201017120726_RemoveColumnsInUser.cs" />
+    <Compile Remove="Migrations\20201017120726_RemoveColumnsInUser.Designer.cs" />
+    <Compile Remove="Migrations\20201017120859_Initial.cs" />
+    <Compile Remove="Migrations\20201017120859_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201017165127_test.cs" />
+    <Compile Remove="Migrations\20201017165127_test.Designer.cs" />
+    <Compile Remove="Migrations\20201017165449_test.cs" />
+    <Compile Remove="Migrations\20201017165449_test.Designer.cs" />
+    <Compile Remove="Migrations\20201018091355_IdsTypeChange.cs" />
+    <Compile Remove="Migrations\20201018091355_IdsTypeChange.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+
+
+</Project>
