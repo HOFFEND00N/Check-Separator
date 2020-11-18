@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj": {}
+    "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj": {}
   },
   "projects": {
-    "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj": {
+    "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj",
+        "projectUniqueName": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj",
         "projectName": "CheckSeparatorMVCTests",
-        "projectPath": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj",
+        "projectPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVCTests\\CheckSeparatorMVCTests.csproj",
         "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparatorMVCTests\\obj\\",
+        "outputPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparatorMVCTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -21,17 +21,17 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj": {
-                "projectPath": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj"
+              "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj": {
+                "projectPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj"
               }
             }
           }
@@ -43,11 +43,50 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
+            "AngleSharp": {
+              "target": "Package",
+              "version": "[0.14.0, )"
+            },
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
             "Microsoft.AspNetCore.Mvc.Testing": {
               "target": "Package",
-              "version": "[3.1.10, )"
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
@@ -55,7 +94,7 @@
             },
             "Moq": {
               "target": "Package",
-              "version": "[4.14.7, )"
+              "version": "[4.15.1, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -92,18 +131,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj": {
+    "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
+        "projectUniqueName": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
         "projectName": "CheckSeparatorMVC",
-        "projectPath": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
+        "projectPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
         "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHub\\CheckSeparatorMVC\\Check-Separator\\CheckSeparator\\obj\\",
+        "outputPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -113,14 +152,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -131,47 +170,48 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Abstractions": {
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Analyzers": {
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -192,7 +232,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

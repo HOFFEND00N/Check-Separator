@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using CheckSeparatorMVC.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace CheckSeparatorMVC.Controllers
 {
@@ -54,6 +55,7 @@ namespace CheckSeparatorMVC.Controllers
             }
             return checks;
         }
+
         public IActionResult CheckProducts(string CheckId)
         {
             var userId = userManager.GetUserId(User);
@@ -102,11 +104,9 @@ namespace CheckSeparatorMVC.Controllers
             return RedirectToAction(nameof(CheckProducts), new { check.CheckId });
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult ViewAddProduct(int CheckId)
         {
-            return View("AddProduct", new Product(CheckId));
+            return View(new Product(CheckId));
         }
 
         [HttpPost]
@@ -151,11 +151,9 @@ namespace CheckSeparatorMVC.Controllers
             return RedirectToAction(nameof(CheckProducts), new { product.CheckId });
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult ViewAddUserToCheck(int checkId)
         {
-            return View("AddUserToCheck", context.Checks.FirstOrDefault(c => c.CheckId == checkId));
+            return View(context.Checks.FirstOrDefault(c => c.CheckId == checkId));
         }
 
         [HttpPost]

@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using CheckSeparatorMVC.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace CheckSeparatorMVCTests.Classes
 {
@@ -16,11 +19,11 @@ namespace CheckSeparatorMVCTests.Classes
             {
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType ==
-                        typeof(DbContextOptions<ApplicationDbContext>));
+                        typeof(DbContextOptions<CheckSeparatorMvcContext>));
 
                 services.Remove(descriptor);
 
-                services.AddDbContext<ApplicationDbContext>(options =>
+                services.AddDbContext<CheckSeparatorMvcContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                 });
@@ -30,7 +33,7 @@ namespace CheckSeparatorMVCTests.Classes
                 using (var scope = sp.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
-                    var db = scopedServices.GetRequiredService<ApplicationDbContext>();
+                    var db = scopedServices.GetRequiredService<CheckSeparatorMvcContext>();
                     var logger = scopedServices
                         .GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
 

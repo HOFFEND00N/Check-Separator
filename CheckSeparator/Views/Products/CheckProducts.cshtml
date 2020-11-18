@@ -4,10 +4,10 @@
     ViewData["Title"] = "Product list";
 }
 
-<form asp-action="ViewAddProduct">
+<a asp-action="ViewAddProduct" asp-route-CheckId="@Model.Check.CheckId" class="btn btn-primary">Add Product</a>
+@*<form asp-action="ViewAddProduct" asp-route-CheckId="@Model.Check.CheckId">
     <input type="submit" class="btn btn-primary" value="Add Product" />
-    <input type="hidden" name="CheckId" value="@Model.Check.CheckId" />
-</form>
+</form>*@
 
 <form asp-controller="Products" asp-action="SaveChangesInCheck">
 
@@ -84,9 +84,8 @@
         <input type="submit" value="Calculate Check" class="btn btn-primary" />
         <input type="hidden" name="CheckId" value="@Model.Check.CheckId">
     </form>
-    <form asp-action="ViewAddUserToCheck">
+    <form asp-action="ViewAddUserToCheck" asp-route-CheckId="@Model.Check.CheckId">
         <input type="submit" value="Add user to check" class="btn btn-primary"/>
-        <input type="hidden" name="CheckId" value="@Model.Check.CheckId"/>
     </form>
 }
 
