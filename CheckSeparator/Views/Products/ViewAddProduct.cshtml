@@ -8,7 +8,7 @@
 
 <h4> Product </h4>
 
-<form asp-action="AddProduct" asp-controller="Products" method="post">
+<form asp-action="AddProduct" asp-controller="Products" method="post" id="AddProductFrom">
     <div class="group">
         <label asp-for="Name"></label>
         <input asp-for="Name" />
@@ -23,7 +23,7 @@
     </div>
     <input type="hidden" name="CheckId" value="@Model.CheckId"/>
     <div class="group">
-        <input type="submit" value="Add" class="btn btn-primary" />
+        <input type="submit" value="Add" class="btn btn-primary" id="AddProductBtn"/>
     </div>
 </form>
 

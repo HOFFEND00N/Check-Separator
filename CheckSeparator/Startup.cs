@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using CheckSeparatorMVC.Models;
+using Microsoft.Extensions.Logging;
 
 namespace CheckSeparatorMVC
 {
@@ -25,12 +26,12 @@ namespace CheckSeparatorMVC
         {
             services.AddDistributedMemoryCache();
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-               .AddCookie(options =>
-                {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                });
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //   .AddCookie(options =>
+            //    {
+            //        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+            //        options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            //    });
 
             services.AddControllersWithViews();
 
@@ -39,9 +40,13 @@ namespace CheckSeparatorMVC
                 options.UseSqlServer(Configuration.GetConnectionString("CheckSeparatorMvcContext"));
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<CheckSeparatorMvcContext>();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -73,5 +78,6 @@ namespace CheckSeparatorMVC
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+       
     }
 }

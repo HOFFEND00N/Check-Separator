@@ -8,7 +8,7 @@
 
 <h4> Product </h4>
 
-<form asp-action="EditProduct" asp-controller="Products">
+<form asp-action="EditProduct" asp-controller="Products" id="EditProductForm">
     <div class="group">
         <label asp-for="Name"></label>
         <input asp-for="Name" />
@@ -23,6 +23,6 @@
     </div>
     <input type="hidden" name="CheckId" value="@Model.CheckId">
     <input type="hidden" name="ProductId" value="@Model.ProductId">
-    <input type="submit" value="EditProduct" class="btn btn-primary" />
+    <input type="submit" value="EditProduct" class="btn btn-primary" id="EditProductBtn"/>
 </form>
 

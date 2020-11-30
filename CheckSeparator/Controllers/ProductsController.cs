@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using CheckSeparatorMVC.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using System;
 
 namespace CheckSeparatorMVC.Controllers
 {
@@ -31,7 +30,7 @@ namespace CheckSeparatorMVC.Controllers
             return View(checks);
         }
 
-        private List<Check> GetUserChecks(string userId) //redundant menthod. I have property CheckUsers
+        private List<Check> GetUserChecks(string userId) 
         {
             var checkIds = context.checkUsers
                 .Where(cu => cu.UserId == userId)
@@ -74,18 +73,18 @@ namespace CheckSeparatorMVC.Controllers
             return View(new CheckAndUserModel(Check, context.Users.FirstOrDefault(u => u.Id == userId)));
         }
 
-        private bool UserInCheck(Check check, User user)
-        {
-            if (context.checkUsers.FirstOrDefault(cu => cu.CheckId == check.CheckId && cu.UserId == user.Id) is null)
-                return false;
-            return true;
-        }
+        //private bool UserInCheck(Check check, User user)
+        //{
+        //    if (context.checkUsers.FirstOrDefault(cu => cu.CheckId == check.CheckId && cu.UserId == user.Id) is null)
+        //        return false;
+        //    return true;
+        //}
 
-        private void AddUserToCheck(Check check, User user)
-        {
-            context.checkUsers.Add(new CheckUser(check.CheckId, user.Id));
-            context.SaveChanges();
-        }
+        //private void AddUserToCheck(Check check, User user)
+        //{
+        //    context.checkUsers.Add(new CheckUser(check.CheckId, user.Id));
+        //    context.SaveChanges();
+        //}
 
         public IActionResult FindCheck(string checkId)
         {
@@ -130,7 +129,7 @@ namespace CheckSeparatorMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var product = context.Product.Find(id);
+            var product = context.Product.FirstOrDefault( p => p.ProductId == id);
             context.Product.Remove(product);
             context.SaveChanges();
             return RedirectToAction(nameof(CheckProducts), new { product.CheckId });

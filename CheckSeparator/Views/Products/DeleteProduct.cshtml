@@ -7,7 +7,7 @@
 <h1>Delete</h1>
 
 <h3>Are you sure to delete this product?</h3>
-<form asp-action="DeleteProduct" asp-controller="Products" method="post">
+<form asp-action="DeleteProduct" asp-controller="Products" method="post" id="DeleteProductForm">
     <div class="group">
         <label asp-for="Name"></label>
         @Html.DisplayFor(model => Model.Name)
@@ -20,6 +20,6 @@
         <label asp-for="Amount"></label>
         @Html.DisplayFor(model => Model.Amount)
     </div>
-    <input type="submit" value="DeleteProduct" class="btn btn-danger" />
+    <input type="submit" value="DeleteProduct" class="btn btn-danger" id="DeleteProductBtn"/>
 </form>
 

@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CheckSeparatorMVC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator", "CheckSeparatorMVC.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("CheckSeparatorMVCTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

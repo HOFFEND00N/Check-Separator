@@ -17,5 +17,9 @@ namespace CheckSeparatorMVC.Models
             UserId = userId;
             ProductId = productId;
         }
+
+        public ProductUser()
+        {
+        }
     }
 }

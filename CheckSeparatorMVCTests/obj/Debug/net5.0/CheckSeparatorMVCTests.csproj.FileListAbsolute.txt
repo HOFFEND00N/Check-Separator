@@ -153,4 +153,3 @@ C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\net5
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\net5.0\ref\CheckSeparatorMVCTests.dll
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\net5.0\CheckSeparatorMVCTests.pdb
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\net5.0\CheckSeparatorMVCTests.genruntimeconfig.cache
-C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\bin\Debug\net5.0\CheckSeparatorMVC.StaticWebAssets.xml
