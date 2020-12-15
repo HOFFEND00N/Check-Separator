@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CheckSeparatorMVC.ViewModels
 {
+    //what are viewmodels 
+    //normally called ...VewModels
     public class CheckAndUserModel
     {
         public Check Check { get; set; }

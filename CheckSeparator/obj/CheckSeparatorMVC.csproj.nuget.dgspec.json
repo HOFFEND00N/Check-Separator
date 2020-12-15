@@ -1,29 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj": {}
+    "C:\\dev\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj": {
+    "C:\\dev\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
+        "projectUniqueName": "C:\\dev\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
         "projectName": "CheckSeparatorMVC",
-        "projectPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
-        "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ivan\\source\\repos\\Check-Separator\\CheckSeparator\\obj\\",
+        "projectPath": "C:\\dev\\Check-Separator\\CheckSeparator\\CheckSeparatorMVC.csproj",
+        "packagesPath": "C:\\Users\\sergeyp\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\Check-Separator\\CheckSeparator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ivan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\sergeyp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nugetosl/nuget/confirmit": {},
+          "http://nugetosl/nuget/confirmit-beta": {},
+          "http://nugetosl/nuget/confirmit-external-signed": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

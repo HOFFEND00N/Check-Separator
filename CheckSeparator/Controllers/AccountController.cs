@@ -9,6 +9,7 @@ namespace CheckSeparatorMVC.Controllers
 {
     public class AccountController : Controller
     {
+        // context is not used
         private readonly CheckSeparatorMvcContext context;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
@@ -35,7 +36,8 @@ namespace CheckSeparatorMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
+                // what's going on here?
+                if (string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
                     model.ReturnUrl = "/Home/Index";
 
                 var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
@@ -58,6 +60,7 @@ namespace CheckSeparatorMVC.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
+            // a lot of nested conditions
             if (ModelState.IsValid)
             {
                 if (!string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))

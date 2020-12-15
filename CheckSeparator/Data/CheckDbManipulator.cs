@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CheckSeparatorMVC.Data
 {
+    // not used?
     public class CheckDbManipulator
     {
         private CheckSeparatorMvcContext context;

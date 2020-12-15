@@ -24,8 +24,10 @@ namespace CheckSeparatorMVC
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Distributed memory cache - what is it and why?
             services.AddDistributedMemoryCache();
 
+            // Commented code - why?
             //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             //   .AddCookie(options =>
             //    {

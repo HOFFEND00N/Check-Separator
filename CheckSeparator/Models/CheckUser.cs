@@ -18,7 +18,7 @@ namespace CheckSeparatorMVC.Models
             UserId = userId;
         }
 
-        public CheckUser()
+        public CheckUser(Check check, User user)
         {
         }
     }

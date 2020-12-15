@@ -30,12 +30,13 @@ namespace CheckSeparatorMVC.Controllers
             return View(checks);
         }
 
+        //usually it's extracted 
         private List<Check> GetUserChecks(string userId) 
         {
             var checkIds = context.checkUsers
                 .Where(cu => cu.UserId == userId)
-                    .Select(c => c.CheckId)
-                        .ToList();
+                .Select(c => c.CheckId)
+                .ToList();
 
             var checks = context.Checks.Where(c => checkIds.Contains(c.CheckId));
             return checks.ToList();
@@ -43,10 +44,12 @@ namespace CheckSeparatorMVC.Controllers
 
         private List<Check> GetUserChecks2(string userId) 
         {
+            //formatting + select
             var user = context.Users
                 .Include(u => u.CheckUsers)
                     .ThenInclude(cu => cu.Check)
-                        .FirstOrDefault(u => u.Id == userId);
+                .FirstOrDefault(u => u.Id == userId);
+            
             List<Check> checks = new List<Check>();
             foreach (var i in user.CheckUsers)
             {
@@ -55,6 +58,7 @@ namespace CheckSeparatorMVC.Controllers
             return checks;
         }
 
+        // naming
         public IActionResult CheckProducts(string CheckId)
         {
             var userId = userManager.GetUserId(User);
@@ -64,6 +68,7 @@ namespace CheckSeparatorMVC.Controllers
             if (Check is null)
                 return View("Error", new ErrorViewModel { RequestId = "Wrong Id" });
 
+            // what's going on here
             foreach (var i in context.productUsers)
             {
                 if (Check.Products.Contains(i.Product) && i.UserId == userId)
@@ -93,6 +98,7 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult CreateCheck()
         {
+            //double save changes
             var userId = userManager.GetUserId(User);
             var user = context.Users.FirstOrDefault(u => u.Id == userId);
             var check = new Check(user);
