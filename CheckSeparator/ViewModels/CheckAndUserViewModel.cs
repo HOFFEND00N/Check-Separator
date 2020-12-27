@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CheckSeparatorMVC.ViewModels
 {
-    public class CheckAndUserModel
+    public class CheckAndUserViewModel
     {
-        public Check Check { get; set; }
+        public CheckViewModel Check { get; set; }
         public User User { get; set; }
 
-        public CheckAndUserModel(Check check, User user)
+        public CheckAndUserViewModel(CheckViewModel check, User user)
         {
             Check = check;
             User = user;

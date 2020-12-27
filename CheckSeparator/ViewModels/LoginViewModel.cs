@@ -2,7 +2,7 @@
 
 namespace CheckSeparatorMVC.ViewModels
 {
-    public class LoginModel
+    public class LoginViewModel
     {
         [Required(ErrorMessage = "Username is not specified")]
         public string UserName { get; set; }
@@ -13,12 +13,12 @@ namespace CheckSeparatorMVC.ViewModels
 
         public string ReturnUrl { get; set; }
 
-        public LoginModel(string ReturnUrl)
+        public LoginViewModel(string ReturnUrl)
         {
             this.ReturnUrl = ReturnUrl;
         }
 
-        public LoginModel()
+        public LoginViewModel()
         {
         }
     }

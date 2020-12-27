@@ -36,7 +36,7 @@ namespace CheckSeparatorMVCTests
         [InlineData("/Products/ViewAddProduct?CheckId=1")]
         [InlineData("/Products/ViewAddUserToCheck?CheckId=1")]
         [InlineData("/Products/CalculateCheck")]
-        [InlineData("/Products/CheckProducts?CheckId=1")]
+        [InlineData("/Products/CheckDetails?CheckId=1")]
         [InlineData("/Products/DeleteProduct/1")]
         [InlineData("/Products/EditProduct/1")]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
@@ -60,7 +60,7 @@ namespace CheckSeparatorMVCTests
         [InlineData("/Products/ViewAddProduct?CheckId=1")]
         [InlineData("/Products/ViewAddUserToCheck?CheckId=1")]
         [InlineData("/Products/CalculateCheck")]
-        [InlineData("/Products/CheckProducts?CheckId=1")]
+        [InlineData("/Products/CheckDetails?CheckId=1")]
         [InlineData("/Products/DeleteProduct/1")]
         [InlineData("/Products/EditProduct/1")]
         public async Task Get_PageIsReturnedForAnAuthenticatedUser(string url)
@@ -118,7 +118,7 @@ namespace CheckSeparatorMVCTests
 
             Assert.Equal(HttpStatusCode.OK, defaultPage.StatusCode);
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Equal("/Products/CheckProducts?CheckId=1", response.Headers.Location.OriginalString);
+            Assert.Equal("/Products/CheckDetails?CheckId=1", response.Headers.Location.OriginalString);
         }
 
         [Fact]
@@ -152,7 +152,7 @@ namespace CheckSeparatorMVCTests
 
             Assert.Equal(HttpStatusCode.OK, defaultPage.StatusCode);
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Equal("/Products/CheckProducts?CheckId=1", response.Headers.Location.OriginalString);
+            Assert.Equal("/Products/CheckDetails?CheckId=1", response.Headers.Location.OriginalString);
         }
 
         [Fact]
@@ -186,7 +186,7 @@ namespace CheckSeparatorMVCTests
 
             Assert.Equal(HttpStatusCode.OK, defaultPage.StatusCode);
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Equal("/Products/CheckProducts?CheckId=1", response.Headers.Location.OriginalString);
+            Assert.Equal("/Products/CheckDetails?CheckId=1", response.Headers.Location.OriginalString);
         }
     }
 }

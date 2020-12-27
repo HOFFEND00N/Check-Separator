@@ -1,15 +1,11 @@
 using CheckSeparatorMVC.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
-using CheckSeparatorMVC.Models;
-using Microsoft.Extensions.Logging;
 
 namespace CheckSeparatorMVC
 {
@@ -24,15 +20,6 @@ namespace CheckSeparatorMVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDistributedMemoryCache();
-
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //   .AddCookie(options =>
-            //    {
-            //        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-            //        options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-            //    });
-
             services.AddControllersWithViews();
 
             services.AddDbContext<CheckSeparatorMvcContext>(options =>

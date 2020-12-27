@@ -919,4 +919,3 @@ C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\bin\Debug\netc
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\obj\Debug\netcoreapp3.1\scopedcss\bundle\CheckSeparatorMVCTests.styles.css
-C:\Users\Ivan\source\repos\Check-Separator\CheckSeparatorMVCTests\bin\Debug\netcoreapp3.1\CheckSeparatorMVC.StaticWebAssets.xml

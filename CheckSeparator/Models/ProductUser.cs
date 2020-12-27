@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CheckSeparatorMVC.Models
+﻿namespace CheckSeparatorMVC.Models
 {
     public class ProductUser
     {
@@ -12,10 +7,10 @@ namespace CheckSeparatorMVC.Models
         public int ProductId { get; set; }
         public Product Product { get; set; }
 
-        public ProductUser(string userId, int productId)
+        public ProductUser(User user, Product product)
         {
-            UserId = userId;
-            ProductId = productId;
+            User = user;
+            Product = product;
         }
 
         public ProductUser()

@@ -15,7 +15,6 @@ namespace CheckSeparatorMVC.Models
 
         public Check(User user)
         {
-            CheckId = 0;
             OwnerId = user.Id;
             OwnerName = user.UserName;
         }

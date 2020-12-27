@@ -24,7 +24,7 @@ namespace CheckSeparatorMVCTests
             var user = new User();
             user.UserName = "test";
             products[0].ProductUsers = new List<ProductUser>();
-            products[0].ProductUsers.Add(new ProductUser(user.Id, products[0].ProductId));
+            products[0].ProductUsers.Add(new ProductUser(user, products[0]));
             products[0].ProductUsers[0].User = user;
             products[0].Check = new Check(user);
             TransactionEqualityComparer transactionEqualityComparer = new TransactionEqualityComparer();
@@ -48,8 +48,8 @@ namespace CheckSeparatorMVCTests
             user1.UserName = "user1";
             user2.UserName = "user2";
             products[0].ProductUsers = new List<ProductUser>();
-            products[0].ProductUsers.Add(new ProductUser(user1.Id, products[0].ProductId));
-            products[0].ProductUsers.Add(new ProductUser(user2.Id, products[0].ProductId));
+            products[0].ProductUsers.Add(new ProductUser(user1, products[0]));
+            products[0].ProductUsers.Add(new ProductUser(user2, products[0]));
             products[0].ProductUsers[0].User = user1;
             products[0].ProductUsers[1].User = user2;
             products[0].Check = new Check(user1);
@@ -75,9 +75,9 @@ namespace CheckSeparatorMVCTests
             user1.UserName = "user1";
             user2.UserName = "user2";
             products[0].ProductUsers = new List<ProductUser>();
-            products[0].ProductUsers.Add(new ProductUser(user1.Id, products[0].ProductId));
+            products[0].ProductUsers.Add(new ProductUser(user1, products[0]));
             products[1].ProductUsers = new List<ProductUser>();
-            products[1].ProductUsers.Add(new ProductUser(user2.Id, products[1].ProductId));
+            products[1].ProductUsers.Add(new ProductUser(user2, products[1]));
             products[0].ProductUsers[0].User = user1;
             products[1].ProductUsers[0].User = user2;
             products[0].Check = new Check(user1);
@@ -93,7 +93,6 @@ namespace CheckSeparatorMVCTests
             Assert.Equal(expectedTransaction, actualTransactions, transactionEqualityComparer);
         }
 
-        // make AssertEqual(x,y) and AssertEqual(x,y,comparator)
         void AssertEqual<T>(IEnumerable<T> x, IEnumerable<T> y)
         {
             var xEnumerator = x.GetEnumerator();

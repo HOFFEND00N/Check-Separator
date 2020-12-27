@@ -2,7 +2,7 @@
 
 namespace CheckSeparatorMVC.ViewModels
 {
-    public class RegisterModel
+    public class RegisterViewModel
     {
         [Required(ErrorMessage = "Email is not specified")]
         [DataType(DataType.EmailAddress)]
@@ -21,12 +21,12 @@ namespace CheckSeparatorMVC.ViewModels
 
         public string ReturnUrl { get; set; }
 
-        public RegisterModel(string ReturnUrl)
+        public RegisterViewModel(string ReturnUrl)
         {
             this.ReturnUrl = ReturnUrl;
         }
 
-        public RegisterModel()
+        public RegisterViewModel()
         {
         }
     }

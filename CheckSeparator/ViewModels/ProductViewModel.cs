@@ -1,21 +1,20 @@
-﻿using System;
+﻿using CheckSeparatorMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CheckSeparatorMVC.Models
+namespace CheckSeparatorMVC.ViewModels
 {
-    public class Product
+    public class ProductViewModel
     {
         public int ProductId { get; set; }
 
         [DataType(DataType.Currency)]
-        [Range(1,1000000)]
+        [Range(1, 1000000)]
         [Required]
         public double Price { get; set; }
 
-        [Range(1,1000000)]
+        [Range(1, 1000000)]
         [Required]
         public int Amount { get; set; }
 
@@ -28,24 +27,38 @@ namespace CheckSeparatorMVC.Models
 
         public Check Check { get; set; }
 
+        public bool IsChecked { get; set; }
+
         public List<ProductUser> ProductUsers { get; set; }
-        public Product()
+
+        public ProductViewModel()
         {
             ProductId = 0;
             Price = 0;
             Amount = 0;
             Name = "";
         }
-        public Product(int checkId)
+
+        public ProductViewModel(int checkId)
         {
             CheckId = checkId;
         }
-        public Product(int id, string name, double price, int amount)
+
+        public ProductViewModel(int id, string name, double price, int amount)
         {
             ProductId = id;
             Price = price;
             Name = name;
             Amount = amount;
+        }
+
+        public ProductViewModel(Product product)
+        {
+            ProductId = product.ProductId;
+            Price = product.Price;
+            Name = product.Name;
+            Amount = product.Amount;
+
         }
     }
 }

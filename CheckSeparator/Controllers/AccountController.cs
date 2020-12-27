@@ -9,12 +9,10 @@ namespace CheckSeparatorMVC.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly CheckSeparatorMvcContext context;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
-        public AccountController(CheckSeparatorMvcContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
-            this.context = context;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
@@ -26,17 +24,16 @@ namespace CheckSeparatorMVC.Controllers
 
         public IActionResult Login(string ReturnUrl)
         {
-            return View(new LoginModel(ReturnUrl));
+            return View(new LoginViewModel(ReturnUrl));
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
-                    model.ReturnUrl = "/Home/Index";
+                SetReturnUrl(model);
 
                 var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
 
@@ -49,20 +46,24 @@ namespace CheckSeparatorMVC.Controllers
             return View(model);
         }
 
+        private void SetReturnUrl(LoginViewModel model)
+        {
+            if (string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
+                model.ReturnUrl = "/Home/Index";
+        }
+
         public IActionResult Register(string ReturnUrl)
         {
-            return View(new RegisterModel(ReturnUrl));
+            return View(new RegisterViewModel(ReturnUrl));
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Register(RegisterModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
-                    model.ReturnUrl = "/Home/Index";
-
+                SetReturnUrl(model);
                 var user = new User { Email = model.Email, UserName = model.UserName };
                 var result = await userManager.CreateAsync(user, model.Password);
 
@@ -71,16 +72,19 @@ namespace CheckSeparatorMVC.Controllers
                     await signInManager.SignInAsync(user, false);
                     return Redirect(model.ReturnUrl);
                 }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
 
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
             }
             return View(model);
+        }
+
+        private void SetReturnUrl(RegisterViewModel model)
+        {
+            if (!string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
+                model.ReturnUrl = "/Home/Index";
         }
 
         public async Task<IActionResult> LogOut()
