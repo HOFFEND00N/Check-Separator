@@ -92,30 +92,6 @@ namespace CheckSeparatorMVCTests
 
             Assert.Equal(expectedTransaction, actualTransactions, transactionEqualityComparer);
         }
-
-        void AssertEqual<T>(IEnumerable<T> x, IEnumerable<T> y)
-        {
-            var xEnumerator = x.GetEnumerator();
-            var yEnumerator = y.GetEnumerator();
-            while (xEnumerator.MoveNext())
-            {
-                yEnumerator.MoveNext();
-                if(!xEnumerator.Current.Equals(yEnumerator.Current))
-                    Assert.True(false);
-            }
-        }
-
-        void AssertEqual<T>(IEnumerable<T> x, IEnumerable<T> y, IEqualityComparer<T> equalityComparer)
-        {
-            var xEnumerator = x.GetEnumerator();
-            var yEnumerator = y.GetEnumerator();
-            while (xEnumerator.MoveNext())
-            {
-                yEnumerator.MoveNext();
-                if (!equalityComparer.Equals(xEnumerator.Current,yEnumerator.Current))
-                    Assert.True(false);
-            }
-        }
     }
 
     public class TransactionEqualityComparer : IEqualityComparer<Transaction>

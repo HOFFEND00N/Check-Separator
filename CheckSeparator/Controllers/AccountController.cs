@@ -1,5 +1,4 @@
-﻿using CheckSeparatorMVC.Data;
-using CheckSeparatorMVC.Models;
+﻿using CheckSeparatorMVC.Models;
 using CheckSeparatorMVC.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -65,18 +64,16 @@ namespace CheckSeparatorMVC.Controllers
             {
                 SetReturnUrl(model);
                 var user = new User { Email = model.Email, UserName = model.UserName };
-                var result = await userManager.CreateAsync(user, model.Password);
+                var registrationResult = await userManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                if (registrationResult.Succeeded)
                 {
                     await signInManager.SignInAsync(user, false);
                     return Redirect(model.ReturnUrl);
                 }
 
-                foreach (var error in result.Errors)
-                {
+                foreach (var error in registrationResult.Errors)
                     ModelState.AddModelError("", error.Description);
-                }
             }
             return View(model);
         }

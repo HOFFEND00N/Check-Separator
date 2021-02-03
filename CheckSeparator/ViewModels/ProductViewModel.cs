@@ -58,7 +58,6 @@ namespace CheckSeparatorMVC.ViewModels
             Price = product.Price;
             Name = product.Name;
             Amount = product.Amount;
-
         }
     }
 }

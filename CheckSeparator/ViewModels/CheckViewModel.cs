@@ -27,7 +27,6 @@ namespace CheckSeparatorMVC.ViewModels
             }
         }
 
-
         public CheckViewModel(User user)
         {
             CheckId = 0;

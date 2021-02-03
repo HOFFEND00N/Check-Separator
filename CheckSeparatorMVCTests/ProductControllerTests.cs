@@ -10,8 +10,6 @@ using System.Net.Http;
 using CheckSeparatorMVCTests.Helpers;
 using AngleSharp.Html.Dom;
 using System.Net;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace CheckSeparatorMVCTests
 {
@@ -23,7 +21,6 @@ namespace CheckSeparatorMVCTests
         public ProductControllerTests(CustomWebApplicationFactory<CheckSeparatorMVC.Startup> factory)
         {
             this.factory = factory;
-            //client = factory.CreateClient();
         }
 
         [Theory]
